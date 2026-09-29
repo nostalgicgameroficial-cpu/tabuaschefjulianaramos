@@ -1,0 +1,117 @@
+Teste a ferramenta Configurador de parâmetro para enviar parâmetros válidos de Identificação de clique (fbc) rapidamente
+Seu servidor não está enviando Identificação de clique (fbc) por meio da API de Conversões. A ferramenta Configurador de parâmetro é um complemento para SDK leve que ajuda a melhorar a cobertura e a qualidade para Identificação de clique (fbc). Envie um email com as instruções para usar a ferramenta Configurador de parâmetro ao seu desenvolvedor ou tente por conta própria.
+Anunciantes que usaram o configurador de parâmetro para enviar a identificação do clique (fbc) viram um aumento de 0,7 na pontuação de qualidade da correspondência de eventos.
+
+Biblioteca do Configurador de Parâmetros
+Updated: 21 de jul de 2026
+A biblioteca de configuradores de parâmetros é uma lista de SDKs de código aberto tanto no lado do cliente (JavaScript do navegador) quanto no lado do servidor (PHP, Java, Python, Node.js, Ruby). Você pode implementar a biblioteca do configurador de parâmetro para melhorar a qualidade da integração da API de Conversões. A biblioteca pode ajudar a criar, gerenciar e enviar determinados parâmetros de informações do cliente, o que pode proporcionar melhorias de desempenho por meio do aumento das pontuações de qualidade da correspondência de eventos (EMQ). A biblioteca lida com o gerenciamento de parâmetros de eventos das seguintes maneiras:
+Gera chaves de correspondência: gera automaticamente chaves de correspondência de alta prioridade da API de Conversões de acordo com as boas práticas da Meta.
+Melhora a cobertura de parâmetros: aumenta a cobertura de parâmetros de eventos importantes, incluindo fbc (ID de clique da Meta), fbp (ID de navegador da Meta), client_ip_address (endereços IP de clientes), referrer_url (URL do referenciador) e event_source_url (URL da fonte do evento).
+Garante a formatação correta: as informações do cliente que você compartilha, como email e número de telefone, são formatadas corretamente para aumentar a probabilidade de correspondência com usuários da Meta.
+Redução do esforço manual: reduz o trabalho manual e o potencial de erros associados ao gerenciamento de parâmetros de eventos por conta própria.
+Visão geral da biblioteca
+Lado do cliente: a biblioteca e os eventos ficam no front-end, no lado do navegador. As bibliotecas são implementadas em JavaScript. É possível integrar a biblioteca diretamente na sua página da web.
+Lado do servidor: as bibliotecas e os eventos ficam no back-end, no lado do servidor. Dependendo da linguagem usada pelo back-end, a Meta fornece bibliotecas em diferentes linguagens (PHP, Java, Python, Node.js e Ruby).
+Recursos compatíveis
+Veja os parâmetros compatíveis:
+Parâmetro compatível	SDK compatível	Descrição
+fbc (ID do clique)
+string
+JavaScript do lado do cliente
+PHP
+NodeJS
+Java
+Python
+Ruby
+O valor da identificação do clique na Meta está armazenado no cookie do navegador _fbc no seu domínio. Consulte Como gerenciar os parâmetros fbc e fbp para saber como obter ou gerar esse valor a partir de um parâmetro de consulta fbclid.
+O formato é: fb.${subdomain_index}.${creation_time}.${fbclid}.${appendix}
+Exemplo: fb.1.1554763741205.AbCdEfGhIjKlMnOpQrStUvWxYz1234567890.ABcDEFGh
+fbp (Identificação do navegador)
+string
+JavaScript do lado do cliente
+PHP
+NodeJS
+Java
+Python
+Ruby
+O valor da identificação do navegador na Meta está armazenado no cookie do navegador _fbp no seu domínio. Consulte Como gerenciar os parâmetros fbc e fbp para ver como receber ou gerar esse valor.
+O formato é: fb.${subdomain_index}.${creation_time}.${random_number}.${appendix}
+Exemplo: fb.1.1596403881668.1116446470.ABcDEFGh
+client_ip_address (endereço IP do cliente)
+string
+JavaScript do lado do cliente
+PHP
+NodeJS
+Java (em breve)
+Python (em breve)
+Ruby (em breve)
+O endereço IP do navegador correspondente ao evento deve ser um endereço IPv4 ou IPv6 válido. Use o IPv6 no lugar do IPv4 para usuários com essa versão habilitada. O parâmetro de dados do usuário client_ip_address não deve ser convertido em hash.
+Exemplo:
+IPv4: 168.212.226.204.ABcDEFGh
+IPv6: 2001:0db8:85a3:0000:0000:8a2e:0370:7334.ABcDEFGh
+referrer_url (URL do referenciador)
+string
+PHP
+NodeJS
+Java
+Python
+Ruby
+O endereço da página da web que encaminhou o usuário à página atual, disparando a API de Conversões. Essa informação é capturada a partir do cabeçalho da solicitação Referrer. Ajuda a aumentar a cobertura de URL e a detecção de sinais de pesquisa.
+Exemplo: https://www.facebook.com/.ABcDEFGh
+event_source_url (URL da origem do evento)
+string
+PHP
+NodeJS
+Java
+Python
+Ruby
+O URL da página da web onde o evento aconteceu, reconstruído a partir da solicitação recebida. Disponível somente quando você usa processRequestFromContext.
+Exemplo: https://www.example.com/checkout?productID=123.ABcDEFGh
+Parâmetros normalizados
+string
+Email (em)
+Número de telefone (ph)
+Nome (fn)
+Sobrenome (ln)
+Data de nascimento (db)
+Gênero (ge)
+Cidade (ct)
+Estado (st)
+Código postal (zp)
+País (country)
+Identificação externa (external_id)
+JavaScript do lado do cliente
+PHP
+NodeJS
+Java (em breve)
+Python (em breve)
+Ruby (em breve)
+A biblioteca adota as boas práticas para normalizar e converter em hash os parâmetros de informações do cliente. Nenhuma ação é necessária. Para mais exemplos de formato, consulte Parâmetros de informações do cliente.
+Exemplo de email:
+Entrada: John_Smith@gmail.com
+Formato padronizado: john_smith@gmail.com
+Saída SHA256 do SDK do Configurador de Parâmetros: 62a14e44f765419d10fea99367361a727c12365e2520f32218d505ed9aa0f62f.ABcDEFGh
+Formato compatível
+Para todos os parâmetros processados pelo configurador de parâmetros, a Meta adiciona um campo de apêndice no final de cada parâmetro para ajudar a avaliar o desempenho da biblioteca. O campo de apêndice tem 8 caracteres contendo (1) a versão do SDK, (2) incrementalidade, (3) o idioma do SDK.
+Confira o GitHub para ver detalhes de implementação. (Exemplo em PHP⁠)
+Observação: se o apêndice for exibido com dois caracteres, ele será um apêndice legado que contém apenas o idioma do SDK. Atualize para a versão mais recente.
+Boas práticas
+Bibliotecas do lado do servidor:
+Novos usuários: use a nova API processRequestFromContext em vez de processRequest (obsoleto).
+Usuários existentes: migrem de processRequest (obsoleto) para processRequestFromContext.
+A nova API recupera dados de carga mais ricos da API de Conversões (por exemplo, event_source_url), requer apenas um único parâmetro para uma integração mais simples e oferece suporte à expansão futura de recursos sem necessidade de readoção.
+Implemente em todas as superfícies: garanta que as bibliotecas estejam implementadas em todas as superfícies, incluindo dispositivos móveis, desktop, navegadores e domínios que você quer monitorar.
+Comparação entre bibliotecas no lado do cliente e no lado do servidor:
+A biblioteca do lado do servidor é destinada à integração no back-end. A biblioteca do lado do servidor oferece suporte para diferentes linguagens (PHP, Java, Python, Node.js e Ruby).
+A biblioteca do lado do cliente é destinada à integração com o navegador front-end. O lado do cliente está disponível apenas em JavaScript.
+Gerenciamento de cookies:
+Capture cookies assim que possível: salve os cookies _fbp e _fbc o mais cedo possível na jornada do cliente em seu site. O ideal é recuperar os cookies _fbp e _fbc no carregamento da página de destino. Não recupere esses parâmetros apenas em eventos de fim do funil nem quando determinados eventos forem disparados.
+Preserve o formato do valor do cookie: não substitua nem ajuste os cookies _fbc ou _fbp. O cookie _fbc diferencia maiúsculas de minúsculas; não converta _fbc para letras minúsculas.
+Gerenciamento de endereços IP:
+Priorize o uso de IPv6 para getIpFn: ao implementar a funcionalidade getIpFn, recupere primeiro o endereço IPv6 e, depois, faça fallback para o endereço IPv4 caso essa capacidade de recuperação não esteja disponível no lado do cliente do usuário.
+Integre o configurador de parâmetros do cliente e do servidor para otimizar o desempenho:
+Use o configurador de parâmetros no lado do cliente para recuperar client_ip_address e salvar em um cookie primeiro.
+Depois, use o configurador de parâmetros do lado do servidor para obter o melhor client_ip_address disponível de cookies e solicitações para enviar à Meta por meio da API de Conversões.
+Normalização e hashing de dados:
+Realize a normalização e a conversão em hash apenas uma vez: aplique normalização e conversão em hash aos parâmetros de informações do cliente apenas uma vez, seja do lado do cliente ou do servidor, antes de enviá-los para a Meta por meio da API de Conversões.
+O valor do parâmetro diferencia maiúsculas de minúsculas: os valores de todos os campos de parâmetros de informações do cliente retornados no configurador de parâmetros diferenciam maiúsculas de minúsculas. Você pode enviar esses valores para a Meta pela API de Conversões sem normalização (por exemplo, letras minúsculas), pois isso foi feito automaticamente pelo SDK do configurador de parâmetro durante o processo.

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { initMetaParameterSetup, generateCapiPayload, hashData } from './metaParameterSetup';
 
 function App() {
   const [showFab, setShowFab] = useState(false);
@@ -44,14 +45,39 @@ function App() {
       }
     });
 
-    // Fire Meta Pixel PageView with Advanced Matching external_id
-    if (window.fbq) {
-      window.fbq('init', '2501465437244788', { external_id: uid });
-      window.fbq('track', 'PageView', {
-        external_id: uid,
-        fbclid: currentFbclid
+    // Inicializa o Meta Parameter Setup para capturar/gerar cookies fbc, fbp e client_ip_address
+    initMetaParameterSetup().then(async (metaParams) => {
+      console.log('Meta Parameters Configured:', metaParams);
+      
+      // Hashing external_id as recommended by 'Parâmetros.txt'
+      const hashedUid = await hashData(uid);
+      
+      const pageViewEventId = 'evt_' + Date.now() + '_pv';
+
+      // Advanced Matching Initialization (Client-side Pixel)
+      if (window.fbq) {
+        window.fbq('init', '2501465437244788', {
+          external_id: hashedUid,
+          client_ip_address: metaParams.client_ip_address,
+          client_user_agent: metaParams.client_user_agent,
+          fbc: metaParams.fbc,
+          fbp: metaParams.fbp
+        });
+        
+        // Track PageView with Deduplication eventID
+        window.fbq('track', 'PageView', {
+          external_id: hashedUid,
+          action_source: 'website',
+          event_source_url: metaParams.event_source_url
+        }, { eventID: pageViewEventId });
+      }
+
+      // Generate the CAPI Payload ("Auxiliar de carga") for Server-Side Use
+      const capiPayload = generateCapiPayload('PageView', pageViewEventId, {
+        external_id: [hashedUid]
       });
-    }
+      console.log('CAPI Payload (PageView):', JSON.stringify(capiPayload, null, 2));
+    });
 
     // Auto-decorate all anchor links on the page that point to checkouts or external URLs
     const decorateLinks = () => {
@@ -87,21 +113,34 @@ function App() {
   }, []);
 
   // Helper function to handle checkout clicks & Meta Pixel InitiateCheckout event
-  const handleCheckoutClick = (e, baseUrl, planName, price) => {
+  const handleCheckoutClick = async (e, baseUrl, planName, price) => {
     if (e && e.preventDefault) e.preventDefault();
     let uid = localStorage.getItem('user_unique_id') || visitorId;
     let currentFbclid = localStorage.getItem('fbclid') || fbclid;
+    
+    const hashedUid = await hashData(uid);
+    const checkoutEventId = 'evt_' + Date.now() + '_ic';
 
-    // Track InitiateCheckout in Meta Pixel
+    // Track InitiateCheckout in Meta Pixel with Deduplication eventID
     if (window.fbq) {
       window.fbq('track', 'InitiateCheckout', {
         content_name: planName,
         value: price,
         currency: 'BRL',
-        external_id: uid,
-        fbclid: currentFbclid
-      });
+        action_source: 'website',
+        event_source_url: window.location.href,
+        external_id: hashedUid,
+      }, { eventID: checkoutEventId });
     }
+
+    // Generate CAPI Payload for InitiateCheckout
+    const capiPayload = generateCapiPayload('InitiateCheckout', checkoutEventId, {
+      external_id: [hashedUid]
+    }, {
+      currency: 'BRL',
+      value: price
+    });
+    console.log('CAPI Payload (InitiateCheckout):', JSON.stringify(capiPayload, null, 2));
 
     // Decorate URL
     let finalUrl = baseUrl;
@@ -184,49 +223,55 @@ function App() {
       <header className="fixed top-0 w-full z-50 pt-safe bg-[#1a9e38] shadow-md"><div className="text-white py-3 px-gutter-mobile text-center flex items-center justify-center gap-1.5"><span className="material-symbols-outlined text-[16px] animate-pulse">alarm</span><p className="text-[14px] font-extrabold tracking-tight">A promoção dessa página acaba no dia <span className="live-date-val underline">28/09/2026</span></p></div></header><main className="flex flex-col relative w-full pt-14 pb-36 bg-[#fdfaf5]"><div className="flex flex-col w-full">
 {/*  1. Dynamic Urgency Bar  */}
 {/*  2. Hero Section  */}
-<section id="hero" className="px-gutter-mobile pt-6 pb-10 flex flex-col items-center text-center bg-[#fdfaf5]">
-  <h1 className="text-[40px] leading-[1.05] text-[#c02f23] font-black tracking-tight mb-2">
-    Tábuas e petiscos
-  </h1>
-  <div className="text-[42px] text-[#e86b24] leading-none -mt-3 mb-4" style={{fontFamily: "'Dancing Script', cursive", fontWeight: 700}}>
-    para o Natal
-  </div>
-  <div className="flex items-center justify-center gap-3 mb-6 text-[#9a4b27] text-[16px] font-serif italic font-bold">
-    <span className="w-10 h-[1px] bg-[#d7ae9c]"></span>
-    <span>com a Chef Ju</span>
-    <span className="w-10 h-[1px] bg-[#d7ae9c]"></span>
-  </div>
+<section id="hero" className="px-gutter-mobile pt-6 pb-10 md:pt-16 md:pb-20 flex flex-col items-center text-center bg-[#fdfaf5]">
+  <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
+    {/* Left Column: Text & CTA on Desktop */}
+    <div className="flex flex-col items-center md:items-start text-center md:text-left flex-1 order-2 md:order-1">
+      <h1 className="text-[40px] md:text-[52px] leading-[1.05] text-[#c02f23] font-black tracking-tight mb-2">
+        Tábuas e petiscos
+      </h1>
+      <div className="text-[42px] md:text-[56px] text-[#e86b24] leading-none -mt-3 mb-4" style={{fontFamily: "'Dancing Script', cursive", fontWeight: 700}}>
+        para o Natal
+      </div>
+      <div className="flex items-center justify-center md:justify-start gap-3 mb-6 text-[#9a4b27] text-[16px] md:text-[18px] font-serif italic font-bold">
+        <span className="w-10 h-[1px] bg-[#d7ae9c]"></span>
+        <span>com a Chef Ju</span>
+        <span className="w-10 h-[1px] bg-[#d7ae9c]"></span>
+      </div>
 
-  <div className="w-full relative max-w-[340px] mb-8">
-    <img alt="Hero Imagem" className="w-full h-auto rounded-3xl object-cover shadow-[0_8px_24px_rgba(0,0,0,0.12)]" src="./code_files/hero_imagem.png" />
+      <p className="font-medium text-[16px] md:text-[18px] leading-relaxed text-[#5a4843] max-w-[320px] md:max-w-[400px] mx-auto md:mx-0 mb-8">
+        Receitas explicadas de maneira simples, com ingredientes acessíveis e combinações que deixam qualquer mesa mais bonita e convidativa.
+      </p>
+
+      <div className="flex flex-col items-center md:items-start mb-8 w-full">
+        <span className="text-[#d32f2f] font-bold text-[18px]">De <span className="line-through">R$47</span> por apenas</span>
+        <span className="text-[#1a9e38] font-black text-[80px] md:text-[96px] leading-none mt-0 tracking-tighter">R$10</span>
+      </div>
+
+      <a className="w-full max-w-[340px] md:max-w-[400px] h-[64px] rounded-full bg-[#1a9e38] text-white flex items-center justify-center gap-2 text-[22px] font-black uppercase tracking-wide shadow-[0_8px_20px_rgba(26,158,56,0.3)] active:scale-95 transition-transform" href="#ofertas">
+        <span className="material-symbols-outlined text-[28px]">lock</span>
+        <span>QUERO MEU ACESSO</span>
+      </a>
+      <span className="text-[12px] md:text-[14px] font-bold text-[#8c7b77] flex items-center justify-center md:justify-start gap-1 mt-4 w-full md:max-w-[400px]">
+        <span className="material-symbols-outlined text-[15px] md:text-[18px]">verified_user</span>
+        Compra 100% segura • Acesso vitalício
+      </span>
+    </div>
+
+    {/* Right Column: Image on Desktop */}
+    <div className="w-full relative max-w-[340px] md:max-w-[450px] mb-8 md:mb-0 flex-1 order-1 md:order-2">
+      <img alt="Hero Imagem" className="w-full h-auto rounded-3xl object-cover shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:scale-105 transition-transform duration-500" src="./code_files/hero_imagem.png" />
+    </div>
   </div>
-
-  <p className="font-medium text-[16px] leading-relaxed text-[#5a4843] max-w-[320px] mx-auto mb-8">
-    Receitas explicadas de maneira simples, com ingredientes acessíveis e combinações que deixam qualquer mesa mais bonita e convidativa.
-  </p>
-
-  <div className="flex flex-col items-center mb-8">
-    <span className="text-[#d32f2f] font-bold text-[18px]">De <span className="line-through">R$47</span> por apenas</span>
-    <span className="text-[#1a9e38] font-black text-[80px] leading-none mt-0 tracking-tighter">R$10</span>
-  </div>
-
-  <a className="w-full max-w-[340px] h-[64px] rounded-full bg-[#1a9e38] text-white flex items-center justify-center gap-2 text-[22px] font-black uppercase tracking-wide shadow-[0_8px_20px_rgba(26,158,56,0.3)] active:scale-95 transition-transform" href="#ofertas">
-    <span className="material-symbols-outlined text-[28px]">lock</span>
-    <span>QUERO MEU ACESSO</span>
-  </a>
-  <span className="text-[12px] font-bold text-[#8c7b77] flex items-center justify-center gap-1 mt-4">
-    <span className="material-symbols-outlined text-[15px]">verified_user</span>
-    Compra 100% segura • Acesso vitalício
-  </span>
 </section>
 
 {/*  Seção: Este livro é perfeito para quem quer  */}
-<section className="px-gutter-mobile py-8 bg-[#fdf8f5]">
-  <div className="max-w-md mx-auto">
-    <h2 className="text-[28px] leading-[1.1] text-[#c02f23] font-black tracking-tight mb-6 text-center">
+<section className="px-gutter-mobile py-8 md:py-16 bg-[#fdf8f5]">
+  <div className="max-w-5xl mx-auto">
+    <h2 className="text-[28px] md:text-[36px] leading-[1.1] text-[#c02f23] font-black tracking-tight mb-8 md:mb-12 text-center">
       Este livro é perfeito para quem quer:
     </h2>
-    <div className="flex flex-col gap-2.5">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
       {[
         "Receber amigos e familiares com uma mesa bonita",
         "Ter novas ideias de petiscos para o fim de semana",
@@ -237,9 +282,9 @@ function App() {
         "Preparar receitas que agradam diferentes gostos",
         "Ter opções prontas para consultar sempre que precisar"
       ].map((item, idx) => (
-        <div key={idx} className="flex items-start gap-3 bg-white p-3 rounded-xl border border-[#f0e4d8] shadow-sm">
-          <span className="material-symbols-outlined text-[#1a9e38] text-[20px] shrink-0 mt-0.5 font-bold">check_circle</span>
-          <span className="text-[#333] font-semibold text-[14px] leading-snug">{item}</span>
+        <div key={idx} className="flex items-start gap-4 bg-white p-4 md:p-6 rounded-2xl border border-[#f0e4d8] shadow-sm hover:shadow-md transition-shadow">
+          <span className="material-symbols-outlined text-[#1a9e38] text-[24px] shrink-0 mt-0.5 font-bold">check_circle</span>
+          <span className="text-[#333] font-semibold text-[15px] md:text-[17px] leading-snug">{item}</span>
         </div>
       ))}
     </div>
@@ -247,72 +292,84 @@ function App() {
 </section>
 
 {/*  Seção Showcase Conteúdo (+90 ideias...)  */}
-<section className="px-gutter-mobile py-10 bg-[#fefbf7]">
-  <div className="max-w-md mx-auto flex flex-col items-center">
-    <div className="text-center mb-3">
-      <div className="text-[54px] font-black text-[#c02f23] leading-none mb-1">+90</div>
-      <h2 className="text-[22px] font-extrabold text-[#5a4843] leading-tight">
-        ideias entre tábuas, petiscos e <span style={{fontFamily: "'Dancing Script', cursive"}} className="text-[#c02f23] text-[30px]">aperitivos</span> da Chef Ju!
-      </h2>
+<section className="px-gutter-mobile py-10 md:py-20 bg-[#fefbf7]">
+  <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16">
+    
+    {/* Left Column */}
+    <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
+      <div className="mb-3">
+        <div className="text-[54px] md:text-[80px] font-black text-[#c02f23] leading-none mb-1">+90</div>
+        <h2 className="text-[22px] md:text-[36px] font-extrabold text-[#5a4843] leading-tight mb-4">
+          ideias entre tábuas, petiscos e <span style={{fontFamily: "'Dancing Script', cursive"}} className="text-[#c02f23] text-[30px] md:text-[46px]">aperitivos</span> da Chef Ju!
+        </h2>
+      </div>
+
+      <p className="text-[14px] md:text-[18px] font-extrabold text-[#5a4843] mb-5 md:mb-8">
+        Tudo prático e bonito para você variar os petiscos
+      </p>
+
+      <a href="#ofertas" className="w-full max-w-[340px] md:max-w-[400px] h-[54px] md:h-[64px] rounded-full bg-[#1a9e38] text-white flex items-center justify-center gap-2 text-[17px] md:text-[20px] font-black uppercase tracking-wide shadow-[0_6px_18px_rgba(26,158,56,0.3)] active:scale-95 transition-transform hidden md:flex">
+        QUERO TODAS AS 90 RECEITAS
+      </a>
     </div>
 
-    <div className="w-full max-w-[340px] mb-4">
-      <img src="./code_files/mokup 90 natal.png" alt="Conteúdo +90 Tábuas e Petiscos da Chef Ju" className="w-full h-auto rounded-2xl shadow-lg object-contain" />
+    {/* Right Column */}
+    <div className="flex-1 flex flex-col items-center w-full">
+      <div className="w-full max-w-[340px] md:max-w-[450px] mb-6">
+        <img src="./code_files/mokup 90 natal.png" alt="Conteúdo +90 Tábuas e Petiscos da Chef Ju" className="w-full h-auto rounded-2xl shadow-lg object-contain hover:scale-105 transition-transform duration-500" />
+      </div>
+
+      <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-w-[340px] sm:max-w-full mb-6 md:mb-0">
+        {[
+          { icon: "🍢", text: "Tábuas de frios" },
+          { icon: "🧀", text: "Tábuas com queijos e embutidos" },
+          { icon: "🥓", text: "Petiscos com calabresa" },
+          { icon: "🔥", text: "Aperitivos quentes e frios" },
+          { icon: "🥣", text: "Molhos e acompanhamentos" },
+          { icon: "🍡", text: "Petiscos para festas" },
+          { icon: "🏠", text: "Opções para receber visitas" },
+          { icon: "✨", text: "Combinações para momentos especiais" }
+        ].map((item, idx) => (
+          <div key={idx} className="bg-white border border-[#f0e4d8] py-2.5 px-4 rounded-full text-center text-[13px] md:text-[14px] font-bold text-[#8c4327] shadow-sm flex items-center justify-center gap-2 hover:shadow-md transition-shadow">
+            <span>{item.icon}</span>
+            <span>{item.text}</span>
+          </div>
+        ))}
+      </div>
+
+      <a href="#ofertas" className="w-full max-w-[340px] h-[54px] rounded-full bg-[#1a9e38] text-white flex items-center justify-center gap-2 text-[17px] font-black uppercase tracking-wide shadow-[0_6px_18px_rgba(26,158,56,0.3)] active:scale-95 transition-transform md:hidden">
+        QUERO TODAS AS 90 RECEITAS
+      </a>
     </div>
 
-    <p className="text-center text-[14px] font-extrabold text-[#5a4843] mb-5">
-      Tudo prático e bonito para você variar os petiscos
-    </p>
-
-    <div className="w-full flex flex-col gap-2.5 max-w-[340px] mb-6">
-      {[
-        { icon: "🍢", text: "Tábuas de frios" },
-        { icon: "🧀", text: "Tábuas com queijos e embutidos" },
-        { icon: "🥓", text: "Petiscos com calabresa" },
-        { icon: "🔥", text: "Aperitivos quentes e frios" },
-        { icon: "🥣", text: "Molhos e acompanhamentos" },
-        { icon: "🍡", text: "Petiscos para festas" },
-        { icon: "🏠", text: "Opções para receber visitas" },
-        { icon: "✨", text: "Combinações para momentos especiais" }
-      ].map((item, idx) => (
-        <div key={idx} className="bg-white border border-[#f0e4d8] py-2.5 px-4 rounded-full text-center text-[13px] font-bold text-[#8c4327] shadow-sm flex items-center justify-center gap-2">
-          <span>{item.icon}</span>
-          <span>{item.text}</span>
-        </div>
-      ))}
-    </div>
-
-    <a href="#ofertas" className="w-full max-w-[340px] h-[54px] rounded-full bg-[#1a9e38] text-white flex items-center justify-center gap-2 text-[17px] font-black uppercase tracking-wide shadow-[0_6px_18px_rgba(26,158,56,0.3)] active:scale-95 transition-transform">
-      QUERO TODAS AS 90 RECEITAS
-    </a>
   </div>
 </section>
-
 {/*  3. Carrossel de Fichas e Entregáveis  */}
 <section className="py-space-md bg-surface-container-low">
-<div className="px-gutter-mobile mb-3 flex flex-col items-center text-center">
+<div className="px-gutter-mobile mb-6 flex flex-col items-center text-center">
 <div className="inline-flex items-center gap-1.5 text-secondary font-label-sm text-label-sm font-bold uppercase tracking-wider mb-2">
 <span className="material-symbols-outlined text-[16px]">menu_book</span>
 <span className="">Passo a Passo Visual</span>
 </div>
-<h2 className="text-[28px] leading-[1.1] text-[#c02f23] font-black tracking-tight mb-2">
+<h2 className="text-[28px] md:text-[36px] leading-[1.1] text-[#c02f23] font-black tracking-tight mb-2">
         Confira as Fichas Práticas por Dentro
       </h2>
-<p className="font-body-sm text-body-sm text-on-surface-variant max-w-sm mx-auto">
+<p className="font-body-sm text-body-sm md:text-body-md text-on-surface-variant max-w-sm md:max-w-2xl mx-auto">
         Cada receita vem com lista detalhada de ingredientes, medidas certas e fotos em ordem cronológica de montagem.
       </p>
 </div>
 {/*  Horizontal Swipe Carousel de Fichas  */}
-<div className="flex overflow-x-auto gap-space-sm px-gutter-mobile pb-3 snap-x snap-mandatory">
+<div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-auto md:overflow-visible gap-4 md:gap-6 px-gutter-mobile md:px-6 max-w-5xl mx-auto pb-6 snap-x snap-mandatory">
+
 {/*  Sheet 1  */}
-<div className="min-w-[260px] max-w-[270px] snap-center bg-surface-container-lowest rounded-xl shadow-md p-2.5 flex flex-col flex-shrink-0">
+<div className="min-w-[260px] max-w-[270px] md:min-w-0 md:max-w-none md:w-full snap-center bg-surface-container-lowest rounded-xl shadow-md p-2.5 md:p-4 flex flex-col flex-shrink-0 hover:shadow-lg transition-shadow">
 <img alt="Tábua Especial de Natal - Ficha Completa" className="w-full rounded-lg object-cover aspect-square shadow-sm mb-2" src="./code_files/unnamed.png" />
 <span className="font-label-sm text-label-sm text-secondary font-bold uppercase">Ficha 01</span>
 <h3 className="font-title-lg text-title-lg text-on-surface font-bold line-clamp-1">Tábua Especial de Natal</h3>
 <p className="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-0.5">Montagem completa com queijos, frios enrolados, frutas frescas e decoração aromática.</p>
 </div>
 {/*  Sheet 2  */}
-<div className="min-w-[260px] max-w-[270px] snap-center bg-surface-container-lowest rounded-xl shadow-md p-2.5 flex flex-col flex-shrink-0">
+<div className="min-w-[260px] max-w-[270px] md:min-w-0 md:max-w-none md:w-full snap-center bg-surface-container-lowest rounded-xl shadow-md p-2.5 md:p-4 flex flex-col flex-shrink-0 hover:shadow-lg transition-shadow">
 <img alt="Ficha Guirlanda Natalina de Petiscos" className="w-full rounded-lg object-cover aspect-square shadow-sm mb-2" src="./code_files/unnamed(1).jpg" />
 <span className="font-label-sm text-label-sm text-secondary font-bold uppercase">Ficha 02</span>
 <h3 className="font-title-lg text-title-lg text-on-surface font-bold line-clamp-1">Guirlanda de Petiscos</h3>
@@ -335,23 +392,24 @@ function App() {
 </div>
 </section>
 {/*  4. Depoimentos Estilo WhatsApp Natalino (Imediatamente abaixo das fichas)  */}
-<section className="px-gutter-mobile py-space-lg bg-surface" id="depoimentos">
-<div className="text-center max-w-sm mx-auto mb-space-md">
+<section className="px-gutter-mobile py-space-lg md:py-20 bg-surface" id="depoimentos">
+<div className="text-center max-w-sm md:max-w-2xl mx-auto mb-space-md md:mb-12">
 <div className="inline-flex items-center gap-1 text-secondary font-label-sm text-label-sm font-bold uppercase tracking-wider mb-1">
 <span className="material-symbols-outlined text-[16px]">chat</span>
 <span>Conversas Reais no WhatsApp</span>
 </div>
-<h2 className="text-[28px] leading-[1.1] text-[#c02f23] font-black tracking-tight mb-2">
+<h2 className="text-[28px] md:text-[36px] leading-[1.1] text-[#c02f23] font-black tracking-tight mb-2 md:mb-4">
   Quem Fez, Amou e Recebeu Elogios
 </h2>
-<p className="font-body-sm text-body-sm text-on-surface-variant max-w-sm mx-auto">
+<p className="font-body-sm text-body-sm md:text-body-md text-on-surface-variant max-w-sm md:max-w-2xl mx-auto">
   Veja os prints enviados pelas nossas alunas após montarem suas tábuas na ceia de Natal:
 </p>
 </div>
 {/*  Carrossel de Prints WhatsApp  */}
-<div className="flex overflow-x-auto gap-3 pb-3 snap-x snap-mandatory">
+<div className="flex md:grid md:grid-cols-3 overflow-x-auto md:overflow-visible gap-4 md:gap-8 pb-6 snap-x snap-mandatory max-w-5xl mx-auto">
+
 {/*  Depoimento 1 (Carla Silveira)  */}
-<div className="min-w-[270px] max-w-[290px] snap-center bg-surface-container-lowest rounded-2xl shadow-lg border border-outline-variant/40 overflow-hidden flex flex-col flex-shrink-0">
+<div className="min-w-[270px] max-w-[290px] md:min-w-0 md:max-w-none md:w-full snap-center bg-surface-container-lowest rounded-2xl shadow-lg border border-outline-variant/40 overflow-hidden flex flex-col flex-shrink-0 hover:shadow-xl transition-shadow">
 <div className="bg-[#075e54] text-white px-3 py-2 flex items-center justify-between">
 <div className="flex items-center gap-2">
 <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
@@ -391,7 +449,7 @@ function App() {
 </div>
 </section>
 {/*  5. Conteúdo do Material  */}
-<section className="px-gutter-mobile py-space-xl bg-surface-container-low" id="receitas"><div className="text-center max-w-md mx-auto mb-space-lg"><div className="inline-flex items-center gap-1.5 bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full shadow-sm mb-2"><span className="material-symbols-outlined text-[15px] text-tertiary">restaurant_menu</span><span className="font-label-sm text-label-sm uppercase tracking-wider font-bold">As Receitas Exclusivas</span></div><h2 className="text-[28px] leading-[1.1] text-[#c02f23] font-black tracking-tight mb-2">Veja algumas das tábuas e receitas que você poderá preparar no Natal</h2><p className="font-body-md text-body-md text-on-surface-variant">Apresentações refinadas que combinam sabores, cores e praticidade para encantar toda a sua família na ceia:</p></div><div className="grid grid-cols-2 gap-3 max-w-md mx-auto"><div className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md flex flex-col border border-outline-variant/30"><img alt="Guirlanda de Petiscos Natalina" className="w-full aspect-square object-cover" src="./code_files/unnamed(1).jpg" /><div className="p-3 flex flex-col justify-between flex-grow"><h4 className="font-title-lg text-title-lg text-primary font-bold leading-tight mb-1">GUIRLANDA DE PETISCOS</h4><p className="font-body-sm text-body-sm text-on-surface-variant leading-snug">A queridinha da ceia, aromática, fresca e impressionante.</p></div></div><div className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md flex flex-col border border-outline-variant/30"><img alt="Árvore Festiva de Queijos &amp; Frutas" className="w-full aspect-square object-cover" src="./code_files/unnamed(2).jpg" /><div className="p-3 flex flex-col justify-between flex-grow"><h4 className="font-title-lg text-title-lg text-primary font-bold leading-tight mb-1">ÁRVORE DE QUEIJOS</h4><p className="font-body-sm text-body-sm text-on-surface-variant leading-snug">Disposição natalina que encanta adultos e crianças na mesa.</p></div></div><div className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md flex flex-col border border-outline-variant/30"><img alt="Tábua Clássica de Natal" className="w-full aspect-square object-cover" src="./code_files/unnamed(3).jpg" /><div className="p-3 flex flex-col justify-between flex-grow"><h4 className="font-title-lg text-title-lg text-primary font-bold leading-tight mb-1">TÁBUA CLÁSSICA DE NATAL</h4><p className="font-body-sm text-body-sm text-on-surface-variant leading-snug">Farta, elegante e com rendimento perfeito para a família.</p></div></div><div className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md flex flex-col border border-outline-variant/30"><img alt="Tábua de Petiscos Quentes" className="w-full aspect-square object-cover" src="./code_files/unnamed(8).jpg" /><div className="p-3 flex flex-col justify-between flex-grow"><h4 className="font-title-lg text-title-lg text-primary font-bold leading-tight mb-1">PETISCOS QUENTES</h4><p className="font-body-sm text-body-sm text-on-surface-variant leading-snug">Folhados crocantes dourados e aperitivos fáceis de montar.</p></div></div><div className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md flex flex-col border border-outline-variant/30"><img alt="Finger Foods &amp; Bruschettas" className="w-full aspect-square object-cover" src="./code_files/unnamed(9).jpg" /><div className="p-3 flex flex-col justify-between flex-grow"><h4 className="font-title-lg text-title-lg text-primary font-bold leading-tight mb-1">FINGER FOODS</h4><p className="font-body-sm text-body-sm text-on-surface-variant leading-snug">Pequenos canapés gourmet com combinação doce e salgada.</p></div></div><div className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md flex flex-col border border-outline-variant/30"><img alt="Tábua Doce Natalina com Vinho" className="w-full aspect-square object-cover" src="./code_files/unnamed(10).jpg" /><div className="p-3 flex flex-col justify-between flex-grow"><h4 className="font-title-lg text-title-lg text-primary font-bold leading-tight mb-1">TÁBUA DOCE NATALINA</h4><p className="font-body-sm text-body-sm text-on-surface-variant leading-snug">Combinações com castanhas, frutas secas, queijos e chocolates.</p></div></div></div></section>
+<section className="px-gutter-mobile py-space-xl md:py-20 bg-surface-container-low" id="receitas"><div className="text-center max-w-md md:max-w-2xl mx-auto mb-space-lg md:mb-12"><div className="inline-flex items-center gap-1.5 bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full shadow-sm mb-2 md:mb-4"><span className="material-symbols-outlined text-[15px] text-tertiary">restaurant_menu</span><span className="font-label-sm text-label-sm uppercase tracking-wider font-bold">As Receitas Exclusivas</span></div><h2 className="text-[28px] md:text-[36px] leading-[1.1] text-[#c02f23] font-black tracking-tight mb-2 md:mb-4">Veja algumas das tábuas e receitas que você poderá preparar no Natal</h2><p className="font-body-md text-body-md text-on-surface-variant">Apresentações refinadas que combinam sabores, cores e praticidade para encantar toda a sua família na ceia:</p></div><div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6 max-w-md md:max-w-5xl mx-auto"><div className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md flex flex-col border border-outline-variant/30"><img alt="Guirlanda de Petiscos Natalina" className="w-full aspect-square object-cover" src="./code_files/unnamed(1).jpg" /><div className="p-3 flex flex-col justify-between flex-grow"><h4 className="font-title-lg text-title-lg text-primary font-bold leading-tight mb-1">GUIRLANDA DE PETISCOS</h4><p className="font-body-sm text-body-sm text-on-surface-variant leading-snug">A queridinha da ceia, aromática, fresca e impressionante.</p></div></div><div className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md flex flex-col border border-outline-variant/30"><img alt="Árvore Festiva de Queijos &amp; Frutas" className="w-full aspect-square object-cover" src="./code_files/unnamed(2).jpg" /><div className="p-3 flex flex-col justify-between flex-grow"><h4 className="font-title-lg text-title-lg text-primary font-bold leading-tight mb-1">ÁRVORE DE QUEIJOS</h4><p className="font-body-sm text-body-sm text-on-surface-variant leading-snug">Disposição natalina que encanta adultos e crianças na mesa.</p></div></div><div className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md flex flex-col border border-outline-variant/30"><img alt="Tábua Clássica de Natal" className="w-full aspect-square object-cover" src="./code_files/unnamed(3).jpg" /><div className="p-3 flex flex-col justify-between flex-grow"><h4 className="font-title-lg text-title-lg text-primary font-bold leading-tight mb-1">TÁBUA CLÁSSICA DE NATAL</h4><p className="font-body-sm text-body-sm text-on-surface-variant leading-snug">Farta, elegante e com rendimento perfeito para a família.</p></div></div><div className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md flex flex-col border border-outline-variant/30"><img alt="Tábua de Petiscos Quentes" className="w-full aspect-square object-cover" src="./code_files/unnamed(8).jpg" /><div className="p-3 flex flex-col justify-between flex-grow"><h4 className="font-title-lg text-title-lg text-primary font-bold leading-tight mb-1">PETISCOS QUENTES</h4><p className="font-body-sm text-body-sm text-on-surface-variant leading-snug">Folhados crocantes dourados e aperitivos fáceis de montar.</p></div></div><div className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md flex flex-col border border-outline-variant/30"><img alt="Finger Foods &amp; Bruschettas" className="w-full aspect-square object-cover" src="./code_files/unnamed(9).jpg" /><div className="p-3 flex flex-col justify-between flex-grow"><h4 className="font-title-lg text-title-lg text-primary font-bold leading-tight mb-1">FINGER FOODS</h4><p className="font-body-sm text-body-sm text-on-surface-variant leading-snug">Pequenos canapés gourmet com combinação doce e salgada.</p></div></div><div className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md flex flex-col border border-outline-variant/30"><img alt="Tábua Doce Natalina com Vinho" className="w-full aspect-square object-cover" src="./code_files/unnamed(10).jpg" /><div className="p-3 flex flex-col justify-between flex-grow"><h4 className="font-title-lg text-title-lg text-primary font-bold leading-tight mb-1">TÁBUA DOCE NATALINA</h4><p className="font-body-sm text-body-sm text-on-surface-variant leading-snug">Combinações com castanhas, frutas secas, queijos e chocolates.</p></div></div></div></section>
 {/* Botão de Ancoragem para Preço antes dos Bônus */}
 <div className="w-full max-w-md mx-auto py-6 px-gutter-mobile text-center">
   <a href="#ofertas" className="w-full h-[56px] rounded-full bg-[#1a9e38] text-white flex items-center justify-center gap-2 text-[17px] font-black uppercase tracking-wide shadow-[0_6px_20px_rgba(26,158,56,0.3)] active:scale-95 transition-transform">
@@ -401,8 +459,8 @@ function App() {
 </div>
 
 {/*  6. Bônus Inclusos na Oferta Completa  */}
-<section className="px-gutter-mobile py-10 bg-[#fdf8f3]" id="bonus">
-  <div className="max-w-md mx-auto text-center">
+<section className="px-gutter-mobile py-10 md:py-20 bg-[#fdf8f3]" id="bonus">
+  <div className="max-w-5xl mx-auto text-center">
     {/* Pill Badge */}
     <div className="inline-flex items-center gap-1.5 bg-[#d83a18] text-white text-[11px] font-black uppercase px-3.5 py-1 rounded-full shadow-sm mb-3">
       <span>🎁 PRESENTE ESPECIAL</span>
@@ -421,7 +479,7 @@ function App() {
     </h2>
 
     {/* Bonus Cards Grid */}
-    <div className="flex flex-col gap-5 max-w-md mx-auto mb-8">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8 max-w-md md:max-w-5xl mx-auto mb-8 items-stretch">
       {[
         {
           tag: "BÔNUS 1",
@@ -478,7 +536,7 @@ function App() {
     </div>
 
     {/* Bottom Summary Banner */}
-    <div className="bg-[#fff7f2] border-2 border-[#f5dcd2] rounded-2xl p-3.5 max-w-md mx-auto text-center shadow-sm">
+    <div className="bg-[#fff7f2] border-2 border-[#f5dcd2] rounded-2xl p-3.5 max-w-md md:max-w-3xl mx-auto text-center shadow-sm">
       <p className="text-[13px] sm:text-[14px] font-black text-[#c02f23] flex items-center justify-center gap-1.5 flex-wrap uppercase tracking-tight">
         <span>💚</span>
         <span>VALOR TOTAL DOS BÔNUS → TUDO GRÁTIS HOJE!</span>
@@ -487,17 +545,17 @@ function App() {
   </div>
 </section>
 {/*  7. Seção Final de Planos & Checkout  */}
-<section className="px-gutter-mobile py-space-xl bg-surface-container-low text-on-surface" id="ofertas">
-  <div className="max-w-md mx-auto flex flex-col items-center text-center">
-    <h2 className="text-[28px] leading-[1.1] text-[#c02f23] font-black tracking-tight mb-2">
+<section className="px-gutter-mobile py-space-xl md:py-20 bg-surface-container-low text-on-surface" id="ofertas">
+  <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
+    <h2 className="text-[28px] md:text-[36px] leading-[1.1] text-[#c02f23] font-black tracking-tight mb-2 md:mb-4">
       Selecione a opção que combina melhor com você
     </h2>
-    <p className="font-body-sm text-body-sm text-on-surface-variant mb-6 max-w-xs">
+    <p className="font-body-sm text-body-sm md:text-body-md text-on-surface-variant mb-6 md:mb-10 max-w-xs md:max-w-md">
       Acesso imediato e vitalício a todas as receitas e bônus da Chefe Ju
     </p>
 
     {/* Cards Lado a Lado no Mobile */}
-    <div className="w-full grid grid-cols-2 gap-2 mb-6 text-left items-stretch">
+    <div className="w-full grid grid-cols-2 md:grid-cols-2 gap-2 md:gap-8 mb-6 md:mb-10 text-left items-stretch max-w-md md:max-w-3xl mx-auto">
       {/* Card 1: Oferta Básica */}
       <div className="bg-white text-on-surface rounded-2xl p-2.5 shadow-md border-2 border-[#e1bfbb] flex flex-col justify-between relative">
         <div>
@@ -617,8 +675,8 @@ function App() {
 </section>
 
 {/*  Seção de Avaliações e Depoimentos dos Alunos (3.500+ pessoas já montaram)  */}
-<section className="px-gutter-mobile py-10 bg-[#fdfaf5]" id="avaliacoes">
-  <div className="max-w-md mx-auto">
+<section className="px-gutter-mobile py-10 md:py-20 bg-[#fdfaf5]" id="avaliacoes">
+  <div className="max-w-5xl mx-auto">
     {/* Header com 3.500+ */}
     <div className="text-center mb-6">
       <div className="text-[58px] font-black text-[#1a9e38] leading-none mb-1 tracking-tight">
@@ -633,7 +691,7 @@ function App() {
     </div>
 
     {/* Card de Avaliação 4.9 */}
-    <div className="bg-white rounded-2xl p-4 shadow-md border border-[#f0e4d8] mb-8 flex items-center justify-between gap-3">
+    <div className="bg-white rounded-2xl p-4 md:p-6 shadow-md border border-[#f0e4d8] mb-8 md:mb-12 flex items-center justify-between gap-3 max-w-md md:max-w-2xl mx-auto">
       <div className="flex flex-col items-center justify-center shrink-0 pr-3 border-r border-[#eee]">
         <div className="text-[44px] font-black text-[#1c3a27] leading-none">4.9</div>
         <div className="flex text-[#e65100] text-[13px] my-1">
@@ -661,7 +719,7 @@ function App() {
     </div>
 
     {/* Grid de Cards de Depoimentos Reais */}
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-12">
       {[
         {
           name: "Ana M.",
@@ -754,7 +812,7 @@ function App() {
     </div>
 
     {/* Seção de Garantia de 15 Dias com JkRnpY1.png */}
-    <div className="bg-[#fffcf7] border-2 border-[#e8d8cb] rounded-3xl p-5 shadow-xl max-w-md mx-auto text-center relative overflow-hidden">
+    <div className="bg-[#fffcf7] border-2 border-[#e8d8cb] rounded-3xl p-5 md:p-10 shadow-xl max-w-md md:max-w-4xl mx-auto text-center relative overflow-hidden">
       <div className="inline-flex items-center gap-1 bg-[#e0f2fe] text-[#0284c7] px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider mb-3">
         <span className="material-symbols-outlined text-[13px]">verified_user</span>
         <span>RISCO ZERO</span>
@@ -778,16 +836,16 @@ function App() {
   </div>
 </section>
 {/*  8. Perguntas Frequentes (FAQ)  */}
-<section className="px-gutter-mobile py-space-lg" id="faq">
-<div className="text-center max-w-sm mx-auto mb-space-md">
+<section className="px-gutter-mobile py-space-lg md:py-20" id="faq">
+<div className="text-center max-w-sm md:max-w-2xl mx-auto mb-space-md md:mb-12">
 <span className="font-label-sm text-label-sm text-outline uppercase tracking-wider font-bold block mb-1">
         Tire Suas Dúvidas
       </span>
-<h2 className="text-[28px] leading-[1.1] text-[#c02f23] font-black tracking-tight mb-2">
+<h2 className="text-[28px] md:text-[36px] leading-[1.1] text-[#c02f23] font-black tracking-tight mb-2">
         Perguntas Frequentes
       </h2>
 </div>
-<div className="flex flex-col gap-2.5 max-w-md mx-auto" id="faq-accordion">
+<div className="flex flex-col gap-2.5 md:gap-4 max-w-md md:max-w-3xl mx-auto" id="faq-accordion">
 {/*  FAQ 1  */}
 <div className="bg-surface-container rounded-xl overflow-hidden shadow-sm">
 <button className="w-full p-space-md flex items-center justify-between text-left gap-2 font-title-lg text-title-lg font-bold text-on-surface faq-toggle" type="button">
