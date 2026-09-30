@@ -260,7 +260,7 @@ function App() {
 
     {/* Right Column: Image on Desktop */}
     <div className="w-full relative max-w-[340px] md:max-w-[450px] mb-8 md:mb-0 flex-1 order-1 md:order-2">
-      <img alt="Hero Imagem" className="w-full h-auto rounded-3xl object-cover shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:scale-105 transition-transform duration-500" src="./code_files/hero_imagem.png" />
+      <img alt="Hero Imagem" className="w-full h-auto rounded-3xl object-cover shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:scale-105 transition-transform duration-500" src="./code_files/hero_imagem.webp" />
     </div>
   </div>
 </section>
