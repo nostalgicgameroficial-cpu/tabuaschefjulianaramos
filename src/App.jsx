@@ -224,29 +224,36 @@ function App() {
 {/*  1. Dynamic Urgency Bar  */}
 {/*  2. Hero Section  */}
 <section id="hero" className="px-gutter-mobile pt-6 pb-10 md:pt-16 md:pb-20 flex flex-col items-center text-center bg-[#fdfaf5]">
-  <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
-    {/* Left Column: Text & CTA on Desktop */}
-    <div className="flex flex-col items-center md:items-start text-center md:text-left flex-1 order-2 md:order-1">
-      <h1 className="text-[40px] md:text-[52px] leading-[1.05] text-[#c02f23] font-black tracking-tight mb-2">
-        Tábuas e petiscos
+  <div className="max-w-5xl mx-auto flex flex-col md:grid md:grid-cols-2 items-center justify-center gap-6 md:gap-x-16 md:gap-y-0">
+    
+    {/* 1. Headline & Price Block (Top on Mobile & Left Column top on Desktop) */}
+    <div className="flex flex-col items-center md:items-start text-center md:text-left md:col-start-1 md:row-start-1 w-full">
+      <h1 className="text-[28px] sm:text-[34px] md:text-[42px] leading-[1.15] text-[#c02f23] font-black tracking-tight mb-2">
+        Guia Com Mais de 90 <span className="text-[#e86b24]">Tábuas Natalinas Lindas</span> Pra Você Criar Nesse Natal <span style={{fontFamily: "'Dancing Script', cursive"}} className="text-[#e86b24] text-[30px] sm:text-[38px] md:text-[48px] inline-block font-bold">Mesmo Sem Prática</span>
       </h1>
-      <div className="text-[42px] md:text-[56px] text-[#e86b24] leading-none -mt-3 mb-4" style={{fontFamily: "'Dancing Script', cursive", fontWeight: 700}}>
-        para o Natal
-      </div>
-      <div className="flex items-center justify-center md:justify-start gap-3 mb-6 text-[#9a4b27] text-[16px] md:text-[18px] font-serif italic font-bold">
+      <div className="flex items-center justify-center md:justify-start gap-3 mb-3 text-[#9a4b27] text-[15px] md:text-[17px] font-serif italic font-bold">
         <span className="w-10 h-[1px] bg-[#d7ae9c]"></span>
         <span>com a Chef Ju</span>
         <span className="w-10 h-[1px] bg-[#d7ae9c]"></span>
       </div>
 
-      <p className="font-medium text-[16px] md:text-[18px] leading-relaxed text-[#5a4843] max-w-[320px] md:max-w-[400px] mx-auto md:mx-0 mb-8">
-        Receitas explicadas de maneira simples, com ingredientes acessíveis e combinações que deixam qualquer mesa mais bonita e convidativa.
-      </p>
-
-      <div className="flex flex-col items-center md:items-start mb-8 w-full">
-        <span className="text-[#d32f2f] font-bold text-[18px]">De <span className="line-through">R$47</span> por apenas</span>
-        <span className="text-[#1a9e38] font-black text-[80px] md:text-[96px] leading-none mt-0 tracking-tighter">R$10</span>
+      {/* Preço de R$10 Reduzido e visível imediatamente ao carregar */}
+      <div className="flex flex-col items-center md:items-start mb-3 w-full">
+        <span className="text-[#d32f2f] font-bold text-[14px] sm:text-[16px]">De <span className="line-through">R$47</span> por apenas</span>
+        <span className="text-[#1a9e38] font-black text-[42px] sm:text-[50px] md:text-[58px] leading-none tracking-tighter mt-0.5">R$10</span>
       </div>
+    </div>
+
+    {/* 2. Hero Image Block (Middle on Mobile & Right Column on Desktop) */}
+    <div className="w-full relative max-w-[340px] md:max-w-[450px] mb-6 md:mb-0 md:col-start-2 md:row-start-1 md:row-span-2 self-center flex justify-center">
+      <img alt="Hero Imagem" className="w-full h-auto rounded-3xl object-cover shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:scale-105 transition-transform duration-500" src="./code_files/hero_imagem.webp" />
+    </div>
+
+    {/* 3. Subheadline & CTA Block (Bottom on Mobile & Left Column bottom on Desktop) */}
+    <div className="flex flex-col items-center md:items-start text-center md:text-left md:col-start-1 md:row-start-2 w-full">
+      <p className="font-medium text-[15px] md:text-[17px] leading-relaxed text-[#5a4843] max-w-[340px] md:max-w-[440px] mx-auto md:mx-0 mb-6">
+        Escolha entre as mais de 90 Tábuas incríveis com ingredientes acessíveis e combinações que deixam qualquer mesa mais bonita e convidativa.
+      </p>
 
       <a className="w-full max-w-[340px] md:max-w-[400px] h-[64px] rounded-full bg-[#1a9e38] text-white flex items-center justify-center gap-2 text-[22px] font-black uppercase tracking-wide shadow-[0_8px_20px_rgba(26,158,56,0.3)] active:scale-95 transition-transform" href="#ofertas">
         <span className="material-symbols-outlined text-[28px]">lock</span>
@@ -258,11 +265,113 @@ function App() {
       </span>
     </div>
 
-    {/* Right Column: Image on Desktop */}
-    <div className="w-full relative max-w-[340px] md:max-w-[450px] mb-8 md:mb-0 flex-1 order-1 md:order-2">
-      <img alt="Hero Imagem" className="w-full h-auto rounded-3xl object-cover shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:scale-105 transition-transform duration-500" src="./code_files/hero_imagem.webp" />
-    </div>
   </div>
+</section>
+
+{/*  3. Carrossel de Fichas e Entregáveis (Abaixo do 1º botão)  */}
+<section className="py-space-md bg-surface-container-low">
+<div className="px-gutter-mobile mb-6 flex flex-col items-center text-center">
+<div className="inline-flex items-center gap-1.5 text-secondary font-label-sm text-label-sm font-bold uppercase tracking-wider mb-2">
+<span className="material-symbols-outlined text-[16px]">menu_book</span>
+<span className="">Passo a Passo Visual</span>
+</div>
+<h2 className="text-[28px] md:text-[36px] leading-[1.1] text-[#c02f23] font-black tracking-tight mb-2">
+        Confira as Fichas Práticas por Dentro
+      </h2>
+<p className="font-body-sm text-body-sm md:text-body-md text-on-surface-variant max-w-sm md:max-w-2xl mx-auto">
+        Cada receita vem com lista detalhada de ingredientes, medidas certas e fotos em ordem cronológica de montagem.
+      </p>
+</div>
+{/*  Horizontal Swipe Carousel de Fichas  */}
+<div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-auto md:overflow-visible gap-4 md:gap-6 px-gutter-mobile md:px-6 max-w-5xl mx-auto pb-6 snap-x snap-mandatory">
+
+{/*  Sheet 1  */}
+<div className="min-w-[260px] max-w-[270px] md:min-w-0 md:max-w-none md:w-full snap-center bg-surface-container-lowest rounded-xl shadow-md p-2.5 md:p-4 flex flex-col flex-shrink-0 hover:shadow-lg transition-shadow">
+<img alt="Tábua Especial de Natal - Ficha Completa" className="w-full rounded-lg object-cover aspect-square shadow-sm mb-2" src="./code_files/unnamed.png" />
+<span className="font-label-sm text-label-sm text-secondary font-bold uppercase">Ficha 01</span>
+<h3 className="font-title-lg text-title-lg text-on-surface font-bold line-clamp-1">Tábua Especial de Natal</h3>
+<p className="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-0.5">Montagem completa com queijos, frios enrolados, frutas frescas e decoração aromática.</p>
+</div>
+{/*  Sheet 2  */}
+<div className="min-w-[260px] max-w-[270px] md:min-w-0 md:max-w-none md:w-full snap-center bg-surface-container-lowest rounded-xl shadow-md p-2.5 md:p-4 flex flex-col flex-shrink-0 hover:shadow-lg transition-shadow">
+<img alt="Ficha Guirlanda Natalina de Petiscos" className="w-full rounded-lg object-cover aspect-square shadow-sm mb-2" src="./code_files/unnamed(1).jpg" />
+<span className="font-label-sm text-label-sm text-secondary font-bold uppercase">Ficha 02</span>
+<h3 className="font-title-lg text-title-lg text-on-surface font-bold line-clamp-1">Guirlanda de Petiscos</h3>
+<p className="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-0.5">Montagem circular com alecrim fresco, queijo muçarela e flores de salame.</p>
+</div>
+{/*  Sheet 3  */}
+<div className="min-w-[260px] max-w-[270px] snap-center bg-surface-container-lowest rounded-xl shadow-md p-2.5 flex flex-col flex-shrink-0">
+<img alt="Ficha Árvore Festiva de Queijos e Frutas" className="w-full rounded-lg object-cover aspect-square shadow-sm mb-2" src="./code_files/unnamed(2).jpg" />
+<span className="font-label-sm text-label-sm text-secondary font-bold uppercase">Ficha 03</span>
+<h3 className="font-title-lg text-title-lg text-on-surface font-bold line-clamp-1">Árvore de Queijos &amp; Frutas</h3>
+<p className="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-0.5">Camadas triangulares de uvas, morangos, queijo gouda e estrela comestível.</p>
+</div>
+{/*  Sheet 4  */}
+<div className="min-w-[260px] max-w-[270px] snap-center bg-surface-container-lowest rounded-xl shadow-md p-2.5 flex flex-col flex-shrink-0">
+<img alt="Ficha Tábua Clássica de Frios e Nozes" className="w-full rounded-lg object-cover aspect-square shadow-sm mb-2" src="./code_files/unnamed(3).jpg" />
+<span className="font-label-sm text-label-sm text-secondary font-bold uppercase">Ficha 04</span>
+<h3 className="font-title-lg text-title-lg text-on-surface font-bold line-clamp-1">Tábua Clássica de Frios</h3>
+<p className="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-0.5">Combinação equilibrada com queijo brie, presunto parma e mel silvestre.</p>
+</div>
+</div>
+</section>
+
+{/*  4. Depoimentos Estilo WhatsApp Natalino (Logo após as Fichas)  */}
+<section className="px-gutter-mobile py-space-lg md:py-20 bg-surface" id="depoimentos">
+<div className="text-center max-w-sm md:max-w-2xl mx-auto mb-space-md md:mb-12">
+<div className="inline-flex items-center gap-1 text-secondary font-label-sm text-label-sm font-bold uppercase tracking-wider mb-1">
+<span className="material-symbols-outlined text-[16px]">chat</span>
+<span>Conversas Reais no WhatsApp</span>
+</div>
+<h2 className="text-[28px] md:text-[36px] leading-[1.1] text-[#c02f23] font-black tracking-tight mb-2 md:mb-4">
+  Quem Fez, Amou e Recebeu Elogios
+</h2>
+<p className="font-body-sm text-body-sm md:text-body-md text-on-surface-variant max-w-sm md:max-w-2xl mx-auto">
+  Veja os prints enviados pelas nossas alunas após montarem suas tábuas na ceia de Natal:
+</p>
+</div>
+{/*  Carrossel de Prints WhatsApp  */}
+<div className="flex md:grid md:grid-cols-3 overflow-x-auto md:overflow-visible gap-4 md:gap-8 pb-6 snap-x snap-mandatory max-w-5xl mx-auto">
+
+{/*  Depoimento 1 (Carla Silveira)  */}
+<div className="min-w-[270px] max-w-[290px] md:min-w-0 md:max-w-none md:w-full snap-center bg-surface-container-lowest rounded-2xl shadow-lg border border-outline-variant/40 overflow-hidden flex flex-col flex-shrink-0 hover:shadow-xl transition-shadow">
+<div className="bg-[#075e54] text-white px-3 py-2 flex items-center justify-between">
+<div className="flex items-center gap-2">
+<span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+<span className="font-label-sm text-label-sm font-bold">Carla Silveira</span>
+</div>
+<span className="text-[10px] text-emerald-200">Ceia de Natal</span>
+</div>
+<div className="p-1.5 bg-[#efeae2]/50">
+<img alt="Depoimento WhatsApp Carla Silveira sobre tábua de Natal" className="w-full h-auto rounded-xl object-contain shadow-inner" src="./code_files/unnamed(4).jpg" />
+</div>
+<div className="p-2.5 bg-surface-container-low text-center">
+<p className="font-label-sm text-label-sm text-secondary font-bold">“Todo mundo tirou foto antes de comer!”</p>
+</div>
+</div>
+{/*  Depoimento 2 (Mariana Santos)  */}
+<div className="min-w-[270px] max-w-[290px] snap-center bg-surface-container-lowest rounded-2xl shadow-lg border border-outline-variant/40 overflow-hidden flex flex-col flex-shrink-0">
+<div className="bg-[#075e54] text-white px-3 py-2 flex items-center justify-between">
+<div className="flex items-center gap-2">
+<span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+<span className="font-label-sm text-label-sm font-bold">Mariana Santos</span>
+</div>
+<span className="text-[10px] text-emerald-200">Árvore de Queijos</span>
+</div>
+<div className="p-1.5 bg-[#efeae2]/50">
+<img alt="Depoimento WhatsApp Mariana Santos sobre Árvore de Queijos" className="w-full h-auto rounded-xl object-contain shadow-inner" src="./code_files/unnamed(5).jpg" />
+</div>
+<div className="p-2.5 bg-surface-container-low text-center">
+<p className="font-label-sm text-label-sm text-secondary font-bold">“Nunca tinha montado, ficou idêntica!”</p>
+</div>
+</div>
+{/*  Depoimento Novo  */}
+<div className="min-w-[270px] max-w-[290px] snap-center bg-surface-container-lowest rounded-2xl shadow-lg border border-outline-variant/40 overflow-hidden flex flex-col flex-shrink-0">
+<div className="p-1.5 bg-[#efeae2]/50 h-full">
+<img alt="Depoimento WhatsApp" className="w-full h-full object-cover rounded-xl shadow-inner" src="./code_files/chatgpt_testimonial.png" />
+</div>
+</div>
+</div>
 </section>
 
 {/*  Seção: Este livro é perfeito para quem quer  */}
@@ -343,110 +452,6 @@ function App() {
     </div>
 
   </div>
-</section>
-{/*  3. Carrossel de Fichas e Entregáveis  */}
-<section className="py-space-md bg-surface-container-low">
-<div className="px-gutter-mobile mb-6 flex flex-col items-center text-center">
-<div className="inline-flex items-center gap-1.5 text-secondary font-label-sm text-label-sm font-bold uppercase tracking-wider mb-2">
-<span className="material-symbols-outlined text-[16px]">menu_book</span>
-<span className="">Passo a Passo Visual</span>
-</div>
-<h2 className="text-[28px] md:text-[36px] leading-[1.1] text-[#c02f23] font-black tracking-tight mb-2">
-        Confira as Fichas Práticas por Dentro
-      </h2>
-<p className="font-body-sm text-body-sm md:text-body-md text-on-surface-variant max-w-sm md:max-w-2xl mx-auto">
-        Cada receita vem com lista detalhada de ingredientes, medidas certas e fotos em ordem cronológica de montagem.
-      </p>
-</div>
-{/*  Horizontal Swipe Carousel de Fichas  */}
-<div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-auto md:overflow-visible gap-4 md:gap-6 px-gutter-mobile md:px-6 max-w-5xl mx-auto pb-6 snap-x snap-mandatory">
-
-{/*  Sheet 1  */}
-<div className="min-w-[260px] max-w-[270px] md:min-w-0 md:max-w-none md:w-full snap-center bg-surface-container-lowest rounded-xl shadow-md p-2.5 md:p-4 flex flex-col flex-shrink-0 hover:shadow-lg transition-shadow">
-<img alt="Tábua Especial de Natal - Ficha Completa" className="w-full rounded-lg object-cover aspect-square shadow-sm mb-2" src="./code_files/unnamed.png" />
-<span className="font-label-sm text-label-sm text-secondary font-bold uppercase">Ficha 01</span>
-<h3 className="font-title-lg text-title-lg text-on-surface font-bold line-clamp-1">Tábua Especial de Natal</h3>
-<p className="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-0.5">Montagem completa com queijos, frios enrolados, frutas frescas e decoração aromática.</p>
-</div>
-{/*  Sheet 2  */}
-<div className="min-w-[260px] max-w-[270px] md:min-w-0 md:max-w-none md:w-full snap-center bg-surface-container-lowest rounded-xl shadow-md p-2.5 md:p-4 flex flex-col flex-shrink-0 hover:shadow-lg transition-shadow">
-<img alt="Ficha Guirlanda Natalina de Petiscos" className="w-full rounded-lg object-cover aspect-square shadow-sm mb-2" src="./code_files/unnamed(1).jpg" />
-<span className="font-label-sm text-label-sm text-secondary font-bold uppercase">Ficha 02</span>
-<h3 className="font-title-lg text-title-lg text-on-surface font-bold line-clamp-1">Guirlanda de Petiscos</h3>
-<p className="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-0.5">Montagem circular com alecrim fresco, queijo muçarela e flores de salame.</p>
-</div>
-{/*  Sheet 3  */}
-<div className="min-w-[260px] max-w-[270px] snap-center bg-surface-container-lowest rounded-xl shadow-md p-2.5 flex flex-col flex-shrink-0">
-<img alt="Ficha Árvore Festiva de Queijos e Frutas" className="w-full rounded-lg object-cover aspect-square shadow-sm mb-2" src="./code_files/unnamed(2).jpg" />
-<span className="font-label-sm text-label-sm text-secondary font-bold uppercase">Ficha 03</span>
-<h3 className="font-title-lg text-title-lg text-on-surface font-bold line-clamp-1">Árvore de Queijos &amp; Frutas</h3>
-<p className="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-0.5">Camadas triangulares de uvas, morangos, queijo gouda e estrela comestível.</p>
-</div>
-{/*  Sheet 4  */}
-<div className="min-w-[260px] max-w-[270px] snap-center bg-surface-container-lowest rounded-xl shadow-md p-2.5 flex flex-col flex-shrink-0">
-<img alt="Ficha Tábua Clássica de Frios e Nozes" className="w-full rounded-lg object-cover aspect-square shadow-sm mb-2" src="./code_files/unnamed(3).jpg" />
-<span className="font-label-sm text-label-sm text-secondary font-bold uppercase">Ficha 04</span>
-<h3 className="font-title-lg text-title-lg text-on-surface font-bold line-clamp-1">Tábua Clássica de Frios</h3>
-<p className="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-0.5">Combinação equilibrada com queijo brie, presunto parma e mel silvestre.</p>
-</div>
-</div>
-</section>
-{/*  4. Depoimentos Estilo WhatsApp Natalino (Imediatamente abaixo das fichas)  */}
-<section className="px-gutter-mobile py-space-lg md:py-20 bg-surface" id="depoimentos">
-<div className="text-center max-w-sm md:max-w-2xl mx-auto mb-space-md md:mb-12">
-<div className="inline-flex items-center gap-1 text-secondary font-label-sm text-label-sm font-bold uppercase tracking-wider mb-1">
-<span className="material-symbols-outlined text-[16px]">chat</span>
-<span>Conversas Reais no WhatsApp</span>
-</div>
-<h2 className="text-[28px] md:text-[36px] leading-[1.1] text-[#c02f23] font-black tracking-tight mb-2 md:mb-4">
-  Quem Fez, Amou e Recebeu Elogios
-</h2>
-<p className="font-body-sm text-body-sm md:text-body-md text-on-surface-variant max-w-sm md:max-w-2xl mx-auto">
-  Veja os prints enviados pelas nossas alunas após montarem suas tábuas na ceia de Natal:
-</p>
-</div>
-{/*  Carrossel de Prints WhatsApp  */}
-<div className="flex md:grid md:grid-cols-3 overflow-x-auto md:overflow-visible gap-4 md:gap-8 pb-6 snap-x snap-mandatory max-w-5xl mx-auto">
-
-{/*  Depoimento 1 (Carla Silveira)  */}
-<div className="min-w-[270px] max-w-[290px] md:min-w-0 md:max-w-none md:w-full snap-center bg-surface-container-lowest rounded-2xl shadow-lg border border-outline-variant/40 overflow-hidden flex flex-col flex-shrink-0 hover:shadow-xl transition-shadow">
-<div className="bg-[#075e54] text-white px-3 py-2 flex items-center justify-between">
-<div className="flex items-center gap-2">
-<span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-<span className="font-label-sm text-label-sm font-bold">Carla Silveira</span>
-</div>
-<span className="text-[10px] text-emerald-200">Ceia de Natal</span>
-</div>
-<div className="p-1.5 bg-[#efeae2]/50">
-<img alt="Depoimento WhatsApp Carla Silveira sobre tábua de Natal" className="w-full h-auto rounded-xl object-contain shadow-inner" src="./code_files/unnamed(4).jpg" />
-</div>
-<div className="p-2.5 bg-surface-container-low text-center">
-<p className="font-label-sm text-label-sm text-secondary font-bold">“Todo mundo tirou foto antes de comer!”</p>
-</div>
-</div>
-{/*  Depoimento 2 (Mariana Santos)  */}
-<div className="min-w-[270px] max-w-[290px] snap-center bg-surface-container-lowest rounded-2xl shadow-lg border border-outline-variant/40 overflow-hidden flex flex-col flex-shrink-0">
-<div className="bg-[#075e54] text-white px-3 py-2 flex items-center justify-between">
-<div className="flex items-center gap-2">
-<span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-<span className="font-label-sm text-label-sm font-bold">Mariana Santos</span>
-</div>
-<span className="text-[10px] text-emerald-200">Árvore de Queijos</span>
-</div>
-<div className="p-1.5 bg-[#efeae2]/50">
-<img alt="Depoimento WhatsApp Mariana Santos sobre Árvore de Queijos" className="w-full h-auto rounded-xl object-contain shadow-inner" src="./code_files/unnamed(5).jpg" />
-</div>
-<div className="p-2.5 bg-surface-container-low text-center">
-<p className="font-label-sm text-label-sm text-secondary font-bold">“Nunca tinha montado, ficou idêntica!”</p>
-</div>
-</div>
-{/*  Depoimento Novo  */}
-<div className="min-w-[270px] max-w-[290px] snap-center bg-surface-container-lowest rounded-2xl shadow-lg border border-outline-variant/40 overflow-hidden flex flex-col flex-shrink-0">
-<div className="p-1.5 bg-[#efeae2]/50 h-full">
-<img alt="Depoimento WhatsApp" className="w-full h-full object-cover rounded-xl shadow-inner" src="./code_files/chatgpt_testimonial.png" />
-</div>
-</div>
-</div>
 </section>
 {/*  5. Conteúdo do Material  */}
 <section className="px-gutter-mobile py-space-xl md:py-20 bg-surface-container-low" id="receitas"><div className="text-center max-w-md md:max-w-2xl mx-auto mb-space-lg md:mb-12"><div className="inline-flex items-center gap-1.5 bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full shadow-sm mb-2 md:mb-4"><span className="material-symbols-outlined text-[15px] text-tertiary">restaurant_menu</span><span className="font-label-sm text-label-sm uppercase tracking-wider font-bold">As Receitas Exclusivas</span></div><h2 className="text-[28px] md:text-[36px] leading-[1.1] text-[#c02f23] font-black tracking-tight mb-2 md:mb-4">Veja algumas das tábuas e receitas que você poderá preparar no Natal</h2><p className="font-body-md text-body-md text-on-surface-variant">Apresentações refinadas que combinam sabores, cores e praticidade para encantar toda a sua família na ceia:</p></div><div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6 max-w-md md:max-w-5xl mx-auto"><div className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md flex flex-col border border-outline-variant/30"><img alt="Guirlanda de Petiscos Natalina" className="w-full aspect-square object-cover" src="./code_files/unnamed(1).jpg" /><div className="p-3 flex flex-col justify-between flex-grow"><h4 className="font-title-lg text-title-lg text-primary font-bold leading-tight mb-1">GUIRLANDA DE PETISCOS</h4><p className="font-body-sm text-body-sm text-on-surface-variant leading-snug">A queridinha da ceia, aromática, fresca e impressionante.</p></div></div><div className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md flex flex-col border border-outline-variant/30"><img alt="Árvore Festiva de Queijos &amp; Frutas" className="w-full aspect-square object-cover" src="./code_files/unnamed(2).jpg" /><div className="p-3 flex flex-col justify-between flex-grow"><h4 className="font-title-lg text-title-lg text-primary font-bold leading-tight mb-1">ÁRVORE DE QUEIJOS</h4><p className="font-body-sm text-body-sm text-on-surface-variant leading-snug">Disposição natalina que encanta adultos e crianças na mesa.</p></div></div><div className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md flex flex-col border border-outline-variant/30"><img alt="Tábua Clássica de Natal" className="w-full aspect-square object-cover" src="./code_files/unnamed(3).jpg" /><div className="p-3 flex flex-col justify-between flex-grow"><h4 className="font-title-lg text-title-lg text-primary font-bold leading-tight mb-1">TÁBUA CLÁSSICA DE NATAL</h4><p className="font-body-sm text-body-sm text-on-surface-variant leading-snug">Farta, elegante e com rendimento perfeito para a família.</p></div></div><div className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md flex flex-col border border-outline-variant/30"><img alt="Tábua de Petiscos Quentes" className="w-full aspect-square object-cover" src="./code_files/unnamed(8).jpg" /><div className="p-3 flex flex-col justify-between flex-grow"><h4 className="font-title-lg text-title-lg text-primary font-bold leading-tight mb-1">PETISCOS QUENTES</h4><p className="font-body-sm text-body-sm text-on-surface-variant leading-snug">Folhados crocantes dourados e aperitivos fáceis de montar.</p></div></div><div className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md flex flex-col border border-outline-variant/30"><img alt="Finger Foods &amp; Bruschettas" className="w-full aspect-square object-cover" src="./code_files/unnamed(9).jpg" /><div className="p-3 flex flex-col justify-between flex-grow"><h4 className="font-title-lg text-title-lg text-primary font-bold leading-tight mb-1">FINGER FOODS</h4><p className="font-body-sm text-body-sm text-on-surface-variant leading-snug">Pequenos canapés gourmet com combinação doce e salgada.</p></div></div><div className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-md flex flex-col border border-outline-variant/30"><img alt="Tábua Doce Natalina com Vinho" className="w-full aspect-square object-cover" src="./code_files/unnamed(10).jpg" /><div className="p-3 flex flex-col justify-between flex-grow"><h4 className="font-title-lg text-title-lg text-primary font-bold leading-tight mb-1">TÁBUA DOCE NATALINA</h4><p className="font-body-sm text-body-sm text-on-surface-variant leading-snug">Combinações com castanhas, frutas secas, queijos e chocolates.</p></div></div></div></section>
