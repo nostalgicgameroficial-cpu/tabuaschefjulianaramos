@@ -13,39 +13,34 @@ async function optimize() {
     if (stat.isDirectory()) continue;
 
     const ext = path.extname(file).toLowerCase();
-    if (!['.png', '.jpg', '.jpeg', '.webp'].includes(ext)) continue;
+    if (!['.png', '.jpg', '.jpeg'].includes(ext)) continue;
 
     const baseName = path.basename(file, ext);
     const outWebpName = `${baseName}.webp`;
     const outWebpPath = path.join(dir, outWebpName);
 
-    console.log(`Processing: ${file} (${(stat.size / 1024).toFixed(1)} KB)`);
-
     try {
       let pipeline = sharp(filePath);
       const metadata = await pipeline.metadata();
 
-      let maxWidth = 800;
-      if (file.includes('hero_imagem') || file.includes('hero imagem')) maxWidth = 750;
-      else if (file.includes('chatgpt_testimonial') || file.includes('ChatGPT')) maxWidth = 600;
-      else if (file.includes('mokup 90 natal') || file.includes('content_mockup')) maxWidth = 700;
-      else if (file.includes('JkRnpY1')) maxWidth = 300;
-      else if (file.includes('bonus_ano_novo')) maxWidth = 500;
-      else if (file.includes('unnamed') || file.includes('galeria') || file.includes('review')) maxWidth = 500;
+      let maxWidth = 600;
+      if (file.includes('hero_imagem') || file.includes('hero imagem')) maxWidth = 600;
+      else if (file.includes('chatgpt_testimonial') || file.includes('ChatGPT')) maxWidth = 480;
+      else if (file.includes('mokup 90 natal') || file.includes('content_mockup')) maxWidth = 550;
+      else if (file.includes('JkRnpY1')) maxWidth = 250;
+      else if (file.includes('bonus_ano_novo')) maxWidth = 400;
+      else if (file.includes('unnamed') || file.includes('galeria') || file.includes('review')) maxWidth = 400;
 
       if (metadata.width && metadata.width > maxWidth) {
         pipeline = pipeline.resize({ width: maxWidth, fit: 'inside', withoutEnlargement: true });
       }
 
-      const tempOut = path.join(dir, `_temp_${outWebpName}`);
       await pipeline
-        .webp({ quality: 80, effort: 6 })
-        .toFile(tempOut);
+        .webp({ quality: 72, effort: 6 })
+        .toFile(outWebpPath);
 
-      const newStat = fs.statSync(tempOut);
-      console.log(` -> WebP created: ${outWebpName} (${(newStat.size / 1024).toFixed(1)} KB)`);
-
-      fs.renameSync(tempOut, outWebpPath);
+      const newStat = fs.statSync(outWebpPath);
+      console.log(` -> WebP optimized: ${outWebpName} (${(newStat.size / 1024).toFixed(1)} KB)`);
     } catch (err) {
       console.error(`Error processing ${file}:`, err);
     }
