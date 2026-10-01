@@ -1,11 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { initMetaParameterSetup, generateCapiPayload, hashData } from './metaParameterSetup';
+import MemberApp from './MemberApp';
 
 function App() {
   const [showFab, setShowFab] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [visitorId, setVisitorId] = useState('');
   const [fbclid, setFbclid] = useState('');
+  const [viewMode, setViewMode] = useState('sales'); // 'sales' | 'app'
+
+  // Check URL parameter for ?app=true or ?view=app
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('app') === 'true' || params.get('view') === 'app' || window.location.hash === '#app') {
+      setViewMode('app');
+    }
+  }, []);
 
   // 1. Scroll Handler for FAB
   useEffect(() => {
@@ -218,9 +228,29 @@ function App() {
     };
   }, []);
 
+  if (viewMode === 'app') {
+    return <MemberApp onBackToSalesPage={() => setViewMode('sales')} />;
+  }
+
   return (
     <div className="bg-surface text-on-surface antialiased flex flex-col min-h-screen">
-      <header className="fixed top-0 w-full z-50 pt-safe bg-[#1a9e38] shadow-md"><div className="text-white py-3 px-gutter-mobile text-center flex items-center justify-center gap-1.5"><span className="material-symbols-outlined text-[16px] animate-pulse">alarm</span><p className="text-[14px] font-extrabold tracking-tight">A promoção dessa página acaba no dia <span className="live-date-val underline">28/09/2026</span></p></div></header><main className="flex flex-col relative w-full pt-14 pb-36 bg-[#fdfaf5]"><div className="flex flex-col w-full">
+      <header className="fixed top-0 w-full z-50 pt-safe bg-[#1a9e38] shadow-md">
+        <div className="text-white py-2.5 px-gutter-mobile text-center flex items-center justify-between max-w-5xl mx-auto flex-wrap gap-2">
+          <div className="flex items-center gap-1.5 mx-auto sm:mx-0">
+            <span className="material-symbols-outlined text-[16px] animate-pulse">alarm</span>
+            <p className="text-[13px] sm:text-[14px] font-extrabold tracking-tight">A promoção dessa página acaba no dia <span className="live-date-val underline">28/09/2026</span></p>
+          </div>
+          
+          <button 
+            onClick={() => setViewMode('app')}
+            className="mx-auto sm:mx-0 bg-white/20 hover:bg-white/30 text-white text-[11px] font-extrabold px-3 py-1 rounded-full border border-white/30 transition-all flex items-center gap-1 shadow-sm active:scale-95"
+          >
+            <span className="material-symbols-outlined text-[14px]">smartphone</span>
+            <span>ÁREA DE MEMBROS (WEB APP)</span>
+          </button>
+        </div>
+      </header>
+      <main className="flex flex-col relative w-full pt-14 pb-36 bg-[#fdfaf5]"><div className="flex flex-col w-full">
 {/*  1. Dynamic Urgency Bar  */}
 {/*  2. Hero Section  */}
 <section id="hero" className="px-gutter-mobile pt-6 pb-10 md:pt-16 md:pb-20 flex flex-col items-center text-center bg-[#fdfaf5]">
