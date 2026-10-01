@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
 
 // REAL STEP-BY-STEP ASSEMBLY IMAGES (Generated realistic food photography)
-const STEP_IMAGES = [
-  './code_files/step1.webp', // 1. Base com alecrim
-  './code_files/step2.webp', // 2. Distribuição de queijos
-  './code_files/step3.webp', // 3. Adição de frios e rosas de salame
-  './code_files/step4.webp', // 4. Frutas frescas e secas
-  './code_files/step5.webp', // 5. Potes de mel, geleia, castanhas e torradas
-  './code_files/step6.webp'  // 6. Decoração final e apresentação
+const STEP_IMAGES_SETS = [
+  [
+    './code_files/step_real_1.png', 
+    './code_files/step_real_2.png', 
+    './code_files/step_real_3.png', 
+    './code_files/step_real_4.png', 
+    './code_files/step_real_5.png', 
+    './code_files/step_real_6.png'
+  ],
+  [
+    './code_files/step1.webp', 
+    './code_files/step2.webp', 
+    './code_files/step3.webp', 
+    './code_files/step4.webp', 
+    './code_files/step5.webp', 
+    './code_files/step6.webp'
+  ]
 ];
 
 // Helper to generate 90 detailed Christmas & Gourmet Charcuterie Recipes
@@ -62,66 +72,75 @@ const generate90Recipes = () => {
     const template = recipeTemplates[i % recipeTemplates.length];
     const cat = categories[i % categories.length];
     const cover = baseCoverImages[i % baseCoverImages.length];
-
+    
+    // Add variations to make each of the 90 recipes unique
+    const uniqueSuffix = Math.floor(i / recipeTemplates.length) + 1;
     const recipeName = i < recipeTemplates.length 
       ? template.title 
-      : `${template.title} #${Math.floor(i / recipeTemplates.length) + 1}`;
+      : `${template.title} (Versão ${uniqueSuffix})`;
+      
+    const imgSet = STEP_IMAGES_SETS[i % 2];
+    const cheeseOptions = ['Brie', 'Gouda', 'Gorgonzola', 'Parmesão', 'Provolone', 'Muçarela de Búfala'];
+    const fruitOptions = ['Uvas verdes', 'Morangos', 'Figos', 'Damascos', 'Cerejas', 'Tâmaras'];
+    
+    const cheese1 = cheeseOptions[i % cheeseOptions.length];
+    const fruit1 = fruitOptions[(i + 1) % fruitOptions.length];
+    const fruit2 = fruitOptions[(i + 2) % fruitOptions.length];
 
     fullList.push({
       id: `tabua-${idCounter++}`,
       title: recipeName,
       category: cat,
-      subtitle: template.desc,
+      subtitle: `${template.desc} Perfeita combinação com ${cheese1} e ${fruit1}.`,
       servings: i % 2 === 0 ? '6 a 10 pessoas' : '4 a 8 pessoas',
       image: cover,
       dicaExtra: 'Use uma tábua de madeira ou um prato grande e bonito. Aposte em diferentes cores, texturas e formatos para deixar a tábua ainda mais atrativa!',
       ingredients: [
-        { name: 'Queijos variados (Brie, Gouda, Parmesão, Provolone e Muçarela)', checked: false },
-        { name: 'Embutidos selecionados (Presunto Parma, Salame Italiano, Peito de Peru)', checked: false },
-        { name: 'Frutas frescas e secas (Uvas verdes/roxas, Morangos, Figos, Damascos)', checked: false },
-        { name: 'Castanhas e sementes (Nozes quartz, Amêndoas torradas, Pistache)', checked: false },
+        { name: `Queijos variados (${cheese1}, Gouda, e Muçarela)`, checked: false },
+        { name: 'Embutidos selecionados (Presunto Parma, Salame Italiano)', checked: false },
+        { name: `Frutas frescas e secas (${fruit1}, ${fruit2}, Uvas)`, checked: false },
+        { name: 'Castanhas e sementes (Nozes quartz, Amêndoas)', checked: false },
         { name: 'Azeitonas verdes e pretas recheadas', checked: false },
         { name: 'Pães artesanais, baguetes e crackers crocantes', checked: false },
-        { name: 'Potinhos com Geleia de pimenta / damasco e Mel silvestre', checked: false },
-        { name: 'Decoração com ramos de alecrim fresco e tomatinhos cereja', checked: false }
+        { name: 'Potinhos com Geleia de frutas vermelhas e Mel silvestre', checked: false },
+        { name: 'Decoração com ramos de alecrim fresco', checked: false }
       ],
-      // REAL STEP-BY-STEP IMAGES FOR ASSEMBLY TIMELINE
       steps: [
         { 
           step: 1, 
-          title: 'Passo 1: Prepare a base da tábua', 
-          desc: 'Escolha uma tábua de madeira limpa e seca. Lave e seque ramos de alecrim fresco e posicione-os na borda para criar uma moldura verde natalina.', 
-          img: STEP_IMAGES[0] 
+          title: 'Passo 1: Prepare a base', 
+          desc: `Escolha uma tábua limpa. Posicione ramos de alecrim para criar uma moldura e prepare o espaço para o ${cheese1}.`, 
+          img: imgSet[0] 
         },
         { 
           step: 2, 
-          title: 'Passo 2: Distribua os queijos principais', 
-          desc: 'Posicione os queijos em pontos estratégicos. Alterne formatos: a peça de Brie inteira no centro, o Gouda em fatias leque e o Provolone em cubos.', 
-          img: STEP_IMAGES[1] 
+          title: 'Passo 2: Distribua os queijos', 
+          desc: `Posicione os queijos em pontos estratégicos. O ${cheese1} será o destaque principal, coloque-o no centro ou nas pontas.`, 
+          img: imgSet[1] 
         },
         { 
           step: 3, 
-          title: 'Passo 3: Adicione os frios e embutidos', 
-          desc: 'Monte rosas de salame usando a borda de um copo e faça sanfonas dobrando o presunto parma ao meio. Encaixe-os ao lado dos queijos para criar volume.', 
-          img: STEP_IMAGES[2] 
+          title: 'Passo 3: Adicione os frios', 
+          desc: 'Monte rosas de salame usando a borda de um copo e faça sanfonas dobrando o presunto parma ao meio.', 
+          img: imgSet[2] 
         },
         { 
           step: 4, 
-          title: 'Passo 4: Inclua as frutas frescas e secas', 
-          desc: 'Preencha os espaços vazios com cachinhos de uva sem semente, morangos cortados ao meio, figos frescos e damascos secos. O contraste de cores deixa a mesa viva!', 
-          img: STEP_IMAGES[3] 
+          title: 'Passo 4: Inclua as frutas', 
+          desc: `Preencha os espaços vazios com ${fruit1} e ${fruit2}. O contraste de cores deixará sua tábua maravilhosa.`, 
+          img: imgSet[3] 
         },
         { 
           step: 5, 
-          title: 'Passo 5: Adicione torradas, potinhos de mel e castanhas', 
-          desc: 'Coloque pequenos potes com geleia e mel. Disponha as torradas artesanais em semicírculos e espalhe nozes e amêndoas nos cantinhos.', 
-          img: STEP_IMAGES[4] 
+          title: 'Passo 5: Adicione torradas e potinhos', 
+          desc: 'Coloque pequenos potes com geleia e mel. Disponha as torradas artesanais em semicírculos.', 
+          img: imgSet[4] 
         },
         { 
           step: 6, 
-          title: 'Passo 6: Decore e sirva com elegância', 
-          desc: 'Finalize polvilhando ervas frescas, adicione tomatinhos cereja e enfeites comestíveis. Sirva imediatamente e receba os elogios de toda a família!', 
-          img: STEP_IMAGES[5] 
+          title: 'Passo 6: Decoração final', 
+          desc: 'Finalize polvilhando ervas frescas e arrume os cantinhos. Sirva imediatamente!', 
+          img: imgSet[5] 
         }
       ]
     });
@@ -137,7 +156,7 @@ const BONUSES_DATA = [
     id: 'b-1',
     title: 'Guia Especial de Ano Novo (Réveillon)',
     badge: 'BÔNUS 1',
-    img: './code_files/bonus_ano_novo.webp',
+    img: './code_files/bonus_ano_novo_real.png',
     desc: 'Receitas exclusivas de aperitivos dourados e combinações com espumantes para celebrar a virada com muita elegância.',
     content: [
       'Tábua Dourada da Prosperidade (com figos, amêndoas e mel de flor de laranjeira)',
@@ -157,9 +176,13 @@ const BONUSES_DATA = [
     id: 'b-3',
     title: 'Marcadores Decorativos Imprimíveis',
     badge: 'BÔNUS 3',
-    img: './code_files/unnamed(13).webp',
+    img: './code_files/galeria-p3.webp',
     desc: 'Plaquinhas decorativas elegantes prontas para imprimir e identificar os queijos e castanhas na mesa da ceia.',
-    content: []
+    content: [
+      'Moldes em PDF de alta qualidade prontos para imprimir',
+      'Design elegante com caligrafia sofisticada',
+      'Inclui marcadores para: Brie, Gouda, Parmesão, Provolone e muito mais!'
+    ]
   }
 ];
 
@@ -173,11 +196,30 @@ const SHOPPING_CHECKLIST_DEFAULT = [
 ];
 
 export default function MemberApp({ onBackToSalesPage }) {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [passwordInput, setPasswordInput] = useState('');
+  const [passwordError, setPasswordError] = useState(false);
+  
   const [activeTab, setActiveTab] = useState('fichas');
   const [selectedCategory, setSelectedCategory] = useState('Todas');
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [userChecklist, setUserChecklist] = useState(SHOPPING_CHECKLIST_DEFAULT);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const msgBuffer = new TextEncoder().encode(passwordInput);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    
+    if (hashHex === '89df62e636d06994a0431bad81a04ffd69f6fa1aa8198a8f1b8874768971126a') {
+      setIsAuthenticated(true);
+      setPasswordError(false);
+    } else {
+      setPasswordError(true);
+    }
+  };
 
   const toggleChecklistItem = (catIndex, itemIndex) => {
     const updated = [...userChecklist];
@@ -198,6 +240,38 @@ export default function MemberApp({ onBackToSalesPage }) {
     'Opções Econômicas',
     'Aperitivos Rápidos'
   ];
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-[#fdfaf5] flex flex-col items-center justify-center p-4 text-[#2c221e]">
+        <div className="max-w-sm w-full bg-white rounded-3xl p-8 shadow-xl border border-[#eedfd3] text-center">
+          <div className="w-16 h-16 bg-[#1a9e38] rounded-full flex items-center justify-center text-white text-[24px] font-black mx-auto mb-4 shadow-md">
+            Ju
+          </div>
+          <h2 className="text-[22px] font-black mb-2">Área de Membros</h2>
+          <p className="text-[14px] text-[#5a4843] mb-6">Insira a senha de acesso para continuar.</p>
+          <form onSubmit={handleLogin} className="flex flex-col gap-4">
+            <div>
+              <input 
+                type="password"
+                value={passwordInput}
+                onChange={e => setPasswordInput(e.target.value)}
+                placeholder="Digite a senha..."
+                className="w-full bg-[#f8f4ef] border border-[#e8d8cb] rounded-2xl px-4 py-3 text-[15px] focus:outline-none focus:border-[#1a9e38] text-center tracking-[0.2em]"
+              />
+              {passwordError && <p className="text-[#c02f23] text-[12px] mt-2 font-bold">Senha incorreta. Tente novamente.</p>}
+            </div>
+            <button type="submit" className="w-full bg-[#1a9e38] text-white py-3.5 rounded-2xl font-black uppercase tracking-wider shadow-md hover:bg-[#15802e] transition-colors">
+              Entrar
+            </button>
+            <button type="button" onClick={onBackToSalesPage} className="text-[#8c7b77] text-[13px] font-bold mt-2 hover:text-[#5a4843] transition-colors">
+              Voltar para página principal
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
 
   const filteredRecipes = ALL_RECIPES.filter(r => {
     const matchesCat = selectedCategory === 'Todas' || r.category === selectedCategory;
