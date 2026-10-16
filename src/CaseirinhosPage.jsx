@@ -622,7 +622,7 @@ function CaseirinhosPage({ onNavigateHome }) {
             </div>
           </section>
 
-          {/* 7. Vitrine com +60 Sabores de Caseirinhos */}
+          {/* 7. Vitrine com +120 Sabores de Caseirinhos */}
           <section className="px-4 py-12 md:py-20 bg-white">
             <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16">
               
@@ -867,7 +867,7 @@ function CaseirinhosPage({ onNavigateHome }) {
                     <div className="flex flex-col gap-2 mb-3 text-[12px] leading-snug text-[#5c3e2e]">
                       <div className="flex items-start gap-1.5">
                         <span className="material-symbols-outlined text-[16px] text-[#059669] font-bold shrink-0 mt-0.5">check_circle</span>
-                        <span><strong>TUDO do Pacote Básico (+60 Receitas)</strong></span>
+                        <span><strong>TUDO do Pacote Básico (+120 Receitas de Caseirinhos)</strong></span>
                       </div>
                       <div className="flex items-start gap-1.5">
                         <span className="material-symbols-outlined text-[16px] text-[#059669] font-bold shrink-0 mt-0.5">check_circle</span>
@@ -1100,7 +1100,7 @@ function CaseirinhosPage({ onNavigateHome }) {
                   <span className="material-symbols-outlined transition-transform duration-200 faq-icon faq-icon-caseirinhos text-[#888]">expand_more</span>
                 </button>
                 <div className="px-4 pb-4 hidden faq-content-caseirinhos text-[#6b4226] text-[13px]">
-                  O Pacote Básico (R$ 14,00) contém o Guia Essencial com mais de 60 receitas de massas e coberturas vulcão. O Combo VIP (R$ 27,00) entrega a formação completa de renda extra, incluindo as montagens nas embalagens de hambúrguer e blister alto, mais todos os 3 bônus exclusivos: Calculadora de Precificação, Pack de Etiquetas Imprimíveis e o Manual de Vendas Rápidas no WhatsApp.
+                  O Pacote Básico (R$ 14,00) contém o Guia Essencial com mais de 120 receitas de caseirinhos, massas fofinhas e coberturas vulcão. O Combo VIP (R$ 27,00) entrega a formação completa de renda extra, incluindo as montagens nas embalagens de hambúrguer e blister alto, mais todos os 3 bônus exclusivos: Calculadora de Precificação, Pack de Etiquetas Imprimíveis e o Manual de Vendas Rápidas no WhatsApp.
                 </div>
               </div>
 
