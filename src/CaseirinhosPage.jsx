@@ -164,56 +164,62 @@ function CaseirinhosPage({ onNavigateHome }) {
               {/* Left Column: Headline & Price */}
               <div className="flex flex-col items-center md:items-start text-center md:text-left md:col-start-1 md:row-start-1 w-full">
                 
-                {/* Badge Renda Extra */}
-                <div className="inline-flex items-center gap-1.5 bg-[#ea580c] text-white text-[11px] font-black uppercase px-3 py-1 rounded-full shadow-sm mb-3">
-                  <span>💰 MÉTODO EXCLUSIVO DE RENDA EXTRA</span>
+                {/* Badge Renda Extra de Natal */}
+                <div className="inline-flex items-center gap-1.5 bg-[#ea580c] text-white text-[10.5px] sm:text-[11px] font-black uppercase px-3.5 py-1 rounded-full shadow-sm mb-3">
+                  <span>🎄 ESPECIAL DE NATAL: RENDA EXTRA COM CASEIRINHOS</span>
                 </div>
                 
-                <h1 className="text-[28px] sm:text-[34px] md:text-[42px] leading-[1.15] text-[#3e1f0e] font-black tracking-tight mb-2">
-                  + 120 Caseirinhos com <span className="text-[#ea580c]">Recheios Sem Fogo</span> <span style={{fontFamily: "'Dancing Script', cursive"}} className="text-[#059669] text-[32px] sm:text-[40px] md:text-[50px] inline-block font-bold">Com Mais de 600% de Lucro</span>
+                <h1 className="text-[23px] xs:text-[26px] sm:text-[34px] md:text-[42px] leading-[1.18] text-[#3e1f0e] font-black tracking-tight mb-2.5">
+                  Descubra + de 120 Receitas Rápidas de <span className="text-[#ea580c]">Caseirinhos Lucrativos</span> para <span className="text-[#059669]">Faturar Muito Neste Natal! 🎄</span>
                 </h1>
 
-                <div className="flex items-center justify-center md:justify-start gap-3 mb-3 text-[#854d0e] text-[15px] md:text-[17px] font-serif italic font-bold">
-                  <span className="w-10 h-[1px] bg-[#d97706]/40"></span>
+                <div className="flex items-center justify-center md:justify-start gap-2.5 mb-3 text-[#854d0e] text-[13.5px] sm:text-[15px] md:text-[16px] font-serif italic font-bold">
+                  <span className="w-8 sm:w-10 h-[1px] bg-[#d97706]/40"></span>
                   <span>com a Chef Ju</span>
-                  <span className="w-10 h-[1px] bg-[#d97706]/40"></span>
+                  <span className="w-8 sm:w-10 h-[1px] bg-[#d97706]/40"></span>
                 </div>
 
                 {/* Preço de R$ 14 */}
                 <div className="flex flex-col items-center md:items-start mb-3 w-full">
-                  <span className="text-[#c2410c] font-bold text-[14px] sm:text-[16px]">De <span className="line-through">R$67</span> por apenas</span>
+                  <span className="text-[#c2410c] font-bold text-[13px] sm:text-[15px]">De <span className="line-through">R$67</span> por apenas</span>
                   <span className="text-[#059669] font-black text-[42px] sm:text-[50px] md:text-[58px] leading-none tracking-tighter mt-0.5">R$14</span>
                 </div>
 
               </div>
 
               {/* Right Column: Hero Image (Chef Ju com a foto real apontando para os Caseirinhos) */}
-              <div className="w-full relative max-w-[340px] md:max-w-[450px] mb-6 md:mb-0 md:col-start-2 md:row-start-1 md:row-span-2 self-center flex justify-center">
-                <img 
-                  alt="+60 Caseirinhos e Mini Bolos Lucrativos Chef Ju" 
-                  width="750" 
-                  height="750" 
-                  fetchpriority="high" 
-                  decoding="async" 
-                  className="w-full h-auto rounded-3xl object-cover shadow-[0_8px_24px_rgba(0,0,0,0.15)] hover:scale-105 transition-transform duration-500 border border-[#ecd9cd]" 
-                  src="./code_files/hero_caseirinhos.webp" 
-                />
+              <div className="w-full relative max-w-[320px] sm:max-w-[360px] md:max-w-[450px] mb-4 md:mb-0 md:col-start-2 md:row-start-1 md:row-span-2 self-center flex justify-center">
+                <div className="relative">
+                  <img 
+                    alt="+120 Caseirinhos e Mini Bolos Lucrativos Chef Ju" 
+                    width="750" 
+                    height="750" 
+                    fetchpriority="high" 
+                    decoding="async" 
+                    className="w-full h-auto rounded-3xl object-cover shadow-[0_8px_24px_rgba(0,0,0,0.15)] hover:scale-105 transition-transform duration-500 border border-[#ecd9cd]" 
+                    src="./code_files/hero_caseirinhos.webp" 
+                  />
+                  <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-[#059669] text-white text-[10px] sm:text-[11.5px] font-black uppercase px-3 py-1 rounded-full shadow-lg border border-white/90 whitespace-nowrap flex items-center gap-1.5">
+                    <span>🎅</span>
+                    <span>Lucro Imediato Neste Fim de Ano</span>
+                  </div>
+                </div>
               </div>
 
               {/* Subheadline & CTA */}
-              <div className="flex flex-col items-center md:items-start text-center md:text-left md:col-start-1 md:row-start-2 w-full">
-                <p className="font-medium text-[15px] md:text-[17px] leading-relaxed text-[#5c3e2e] max-w-[340px] md:max-w-[440px] mx-auto md:mx-0 mb-6">
-                  O método exclusivo com <strong>recheios cremosos sem levar ao fogão</strong>: processo muito mais fácil, 3x mais rápido, sem passar calor na panela e sem risco de empelotar. Produza na sua cozinha gastando R$ 2,00 e vendendo por R$ 15,00.
+              <div className="flex flex-col items-center md:items-start text-center md:text-left md:col-start-1 md:row-start-2 w-full mt-2 md:mt-0">
+                <p className="font-medium text-[13.5px] sm:text-[15px] md:text-[17px] leading-relaxed text-[#5c3e2e] max-w-[340px] md:max-w-[440px] mx-auto md:mx-0 mb-4 sm:mb-5">
+                  Aprenda massas fofinhas e o método com <strong>recheios aveludados sem levar ao fogão</strong>: processo muito mais fácil, 3x mais rápido, sem passar calor na panela. Custo de R$ 2,00 e venda por R$ 15,00 para lucrar mais de 600% neste fim de ano.
                 </p>
 
                 <a 
-                  className="w-full max-w-[340px] sm:max-w-[400px] min-h-[58px] sm:min-h-[64px] py-3.5 px-4 rounded-full bg-[#059669] text-white flex items-center justify-center gap-2 text-[17px] sm:text-[20px] font-black uppercase tracking-wide shadow-[0_8px_20px_rgba(5,150,105,0.3)] active:scale-95 transition-transform text-center" 
+                  className="w-full max-w-[340px] sm:max-w-[400px] min-h-[56px] sm:min-h-[64px] py-3.5 px-4 rounded-full bg-[#059669] text-white flex items-center justify-center gap-2 text-[16px] sm:text-[19px] font-black uppercase tracking-wide shadow-[0_8px_20px_rgba(5,150,105,0.3)] active:scale-95 transition-transform text-center" 
                   href="#ofertas"
                 >
                   <span className="material-symbols-outlined text-[24px] sm:text-[28px]">lock</span>
                   <span>QUERO MEU ACESSO</span>
                 </a>
-                <span className="text-[12px] md:text-[14px] font-bold text-[#854d0e] flex items-center justify-center md:justify-start gap-1 mt-4 w-full md:max-w-[400px]">
+                <span className="text-[12px] md:text-[14px] font-bold text-[#854d0e] flex items-center justify-center md:justify-start gap-1 mt-3 w-full md:max-w-[400px]">
                   <span className="material-symbols-outlined text-[15px] md:text-[18px]">verified_user</span>
                   Compra 100% segura • Acesso vitalício
                 </span>
@@ -222,75 +228,75 @@ function CaseirinhosPage({ onNavigateHome }) {
             </div>
 
             {/* 4 Selos de Lucro e Vantagens */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 max-w-4xl mx-auto mt-10 w-full relative z-10">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3 md:gap-4 max-w-4xl mx-auto mt-8 sm:mt-10 w-full relative z-10">
               {[
                 { icon: "soup_kitchen", title: "SEM FOGO", desc: "Recheios frios sem panela: mais fácil e rápido" },
                 { icon: "attach_money", title: "LUCRO DE +600%", desc: "Gaste R$ 2,00 por bolo e venda por R$ 15,00" },
                 { icon: "takeout_dining", title: "EMBALAGENS QUE VENDEM", desc: "Apresentação em blister e hambúrguer irresistível" },
                 { icon: "schedule", title: "VENDA RÁPIDA", desc: "Perfeito para vender a pronta entrega no WhatsApp" }
               ].map((item, idx) => (
-                <div key={idx} className="bg-white p-3.5 rounded-2xl border-2 border-[#fed7aa]/60 shadow-md flex flex-col items-center text-center hover:border-[#ea580c] transition-colors">
-                  <span className="material-symbols-outlined text-[#ea580c] text-[30px] mb-1">{item.icon}</span>
-                  <h4 className="font-black text-[12px] md:text-[14px] text-[#3e1f0e] uppercase mb-0.5">{item.title}</h4>
-                  <p className="text-[11px] md:text-[12px] text-[#78350f] leading-tight font-medium">{item.desc}</p>
+                <div key={idx} className="bg-white p-3 sm:p-3.5 rounded-2xl border-2 border-[#fed7aa]/60 shadow-md flex flex-col items-center text-center hover:border-[#ea580c] transition-colors">
+                  <span className="material-symbols-outlined text-[#ea580c] text-[26px] sm:text-[30px] mb-1">{item.icon}</span>
+                  <h4 className="font-black text-[12px] sm:text-[13px] md:text-[14px] text-[#3e1f0e] uppercase mb-0.5">{item.title}</h4>
+                  <p className="text-[10.5px] sm:text-[11px] md:text-[12px] text-[#78350f] leading-tight font-medium">{item.desc}</p>
                 </div>
               ))}
             </div>
 
             {/* Destaque do Mecanismo Único: Recheios Sem Levar ao Fogão */}
-            <div className="w-full max-w-4xl mx-auto mt-6 bg-gradient-to-r from-[#fff7ed] via-white to-[#ecfdf5] border-2 border-[#ea580c]/30 rounded-3xl p-5 md:p-6 shadow-md flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left relative z-10">
-              <div className="flex items-center gap-3.5">
-                <div className="w-14 h-14 rounded-2xl bg-[#ea580c] text-white flex items-center justify-center shrink-0 shadow-md">
-                  <span className="material-symbols-outlined text-[32px]">soup_kitchen</span>
+            <div className="w-full max-w-4xl mx-auto mt-6 bg-gradient-to-r from-[#fff7ed] via-white to-[#ecfdf5] border-2 border-[#ea580c]/30 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-md flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left relative z-10">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[#ea580c] text-white flex items-center justify-center shrink-0 shadow-md">
+                  <span className="material-symbols-outlined text-[28px] sm:text-[32px]">soup_kitchen</span>
                 </div>
                 <div>
-                  <div className="inline-flex items-center gap-1 text-[#ea580c] text-[11px] font-black uppercase tracking-wider mb-0.5">
+                  <div className="inline-flex items-center gap-1 text-[#ea580c] text-[10.5px] sm:text-[11px] font-black uppercase tracking-wider mb-0.5">
                     <span>⚡ MECANISMO ÚNICO & EXCLUSIVO</span>
                   </div>
-                  <h3 className="text-[17px] md:text-[19px] font-black text-[#3e1f0e] leading-snug">
+                  <h3 className="text-[16px] sm:text-[18px] md:text-[19px] font-black text-[#3e1f0e] leading-snug">
                     Recheios Cremosos Sem Levar ao Fogão!
                   </h3>
-                  <p className="text-[12px] md:text-[13px] text-[#6b4226] leading-tight">
+                  <p className="text-[12px] sm:text-[13px] text-[#6b4226] leading-tight">
                     Esqueça passar calor na beira do fogão mexendo panela quente. Recheios aveludados que não queimam, não empelotam, economizam seu gás e aceleram sua produção em até 3x.
                   </p>
                 </div>
               </div>
-              <div className="shrink-0">
-                <span className="bg-[#059669] text-white text-[12px] font-black px-4 py-2 rounded-full uppercase tracking-wide shadow-sm inline-block">
+              <div className="shrink-0 w-full sm:w-auto">
+                <span className="bg-[#059669] text-white text-[12px] font-black px-4 py-2 rounded-full uppercase tracking-wide shadow-sm inline-block w-full sm:w-auto text-center">
                   Processo Fácil & Rápido
                 </span>
               </div>
             </div>
 
             {/* Checklist dos 5 Entregáveis Principais */}
-            <div className="w-full max-w-4xl mx-auto mt-6 bg-white border-2 border-[#059669] rounded-3xl p-5 md:p-8 shadow-xl text-left relative z-10">
-              <div className="inline-flex items-center gap-1.5 bg-[#059669] text-white text-[10px] sm:text-[11px] font-black uppercase px-3.5 py-1 rounded-full shadow-sm mb-3">
+            <div className="w-full max-w-4xl mx-auto mt-6 bg-white border-2 border-[#059669] rounded-2xl sm:rounded-3xl p-4 sm:p-7 shadow-xl text-left relative z-10">
+              <div className="inline-flex items-center gap-1.5 bg-[#059669] text-white text-[10px] sm:text-[11px] font-black uppercase px-3 py-1 rounded-full shadow-sm mb-3">
                 <span>📦 TUDO O QUE VOCÊ VAI RECEBER</span>
               </div>
               
-              <h3 className="text-[20px] sm:text-[24px] font-black text-[#3e1f0e] mb-4">
+              <h3 className="text-[19px] sm:text-[23px] font-black text-[#3e1f0e] mb-3.5">
                 O Pacote Completo Para Começar a Faturar Hoje:
               </h3>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[14px] sm:text-[15px] font-bold text-[#3e1f0e]">
-                <div className="flex items-center gap-2.5 bg-[#f0fdf4] p-3 rounded-2xl border border-[#bbf7d0]">
-                  <span className="text-[20px]">✅</span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 text-[13px] sm:text-[15px] font-bold text-[#3e1f0e]">
+                <div className="flex items-center gap-2 bg-[#f0fdf4] p-2.5 sm:p-3 rounded-xl sm:rounded-2xl border border-[#bbf7d0]">
+                  <span className="text-[18px]">✅</span>
                   <span>120 receitas de caseirinhos</span>
                 </div>
-                <div className="flex items-center gap-2.5 bg-[#f0fdf4] p-3 rounded-2xl border border-[#bbf7d0]">
-                  <span className="text-[20px]">✅</span>
+                <div className="flex items-center gap-2 bg-[#f0fdf4] p-2.5 sm:p-3 rounded-xl sm:rounded-2xl border border-[#bbf7d0]">
+                  <span className="text-[18px]">✅</span>
                   <span>100 recheios irresistíveis (sem fogo)</span>
                 </div>
-                <div className="flex items-center gap-2.5 bg-[#f0fdf4] p-3 rounded-2xl border border-[#bbf7d0]">
-                  <span className="text-[20px]">✅</span>
+                <div className="flex items-center gap-2 bg-[#f0fdf4] p-2.5 sm:p-3 rounded-xl sm:rounded-2xl border border-[#bbf7d0]">
+                  <span className="text-[18px]">✅</span>
                   <span>50 massas de bolo fofinhas e lucrativas</span>
                 </div>
-                <div className="flex items-center gap-2.5 bg-[#f0fdf4] p-3 rounded-2xl border border-[#bbf7d0]">
-                  <span className="text-[20px]">✅</span>
+                <div className="flex items-center gap-2 bg-[#f0fdf4] p-2.5 sm:p-3 rounded-xl sm:rounded-2xl border border-[#bbf7d0]">
+                  <span className="text-[18px]">✅</span>
                   <span>Apostila de precificação (saiba quanto cobrar)</span>
                 </div>
-                <div className="flex items-center gap-2.5 bg-[#fef2f2] p-3 rounded-2xl border border-[#fecaca] sm:col-span-2">
-                  <span className="text-[20px]">🎄</span>
+                <div className="flex items-center gap-2 bg-[#fef2f2] p-2.5 sm:p-3 rounded-xl sm:rounded-2xl border border-[#fecaca] sm:col-span-2">
+                  <span className="text-[18px]">🎄</span>
                   <span>Receitas especiais para o Natal</span>
                 </div>
               </div>
@@ -299,135 +305,135 @@ function CaseirinhosPage({ onNavigateHome }) {
           </section>
 
           {/* 3. Seção com os Adesivos 3D Colados na Página (Visual Diferente e Único) */}
-          <section className="py-12 md:py-16 bg-[#fbf4ec] relative overflow-hidden">
-            <div className="px-4 mb-8 flex flex-col items-center text-center max-w-3xl mx-auto">
-              <div className="inline-flex items-center gap-1.5 text-[#ea580c] bg-[#ffedd5] px-3.5 py-1 rounded-full font-black text-[12px] uppercase tracking-wider mb-2 border border-[#fed7aa]">
-                <span className="material-symbols-outlined text-[16px]">auto_awesome</span>
+          <section className="py-10 md:py-16 bg-[#fbf4ec] relative overflow-hidden">
+            <div className="px-4 mb-6 sm:mb-8 flex flex-col items-center text-center max-w-3xl mx-auto">
+              <div className="inline-flex items-center gap-1.5 text-[#ea580c] bg-[#ffedd5] px-3 py-1 rounded-full font-black text-[11px] sm:text-[12px] uppercase tracking-wider mb-2 border border-[#fed7aa]">
+                <span className="material-symbols-outlined text-[15px]">auto_awesome</span>
                 <span>Os Modelos Mais Desejados e Vendidos</span>
               </div>
               
-              <h2 className="text-[28px] md:text-[38px] leading-[1.12] text-[#3e1f0e] font-black tracking-tight mb-2">
+              <h2 className="text-[26px] sm:text-[34px] md:text-[38px] leading-[1.12] text-[#3e1f0e] font-black tracking-tight mb-2">
                 Conheça os Caseirinhos que Fizeram Nossas Alunas Faturarem
               </h2>
               
-              <p className="text-[14px] md:text-[16px] text-[#6b4226] max-w-xl mx-auto font-medium">
+              <p className="text-[13px] sm:text-[15px] md:text-[16px] text-[#6b4226] max-w-xl mx-auto font-medium">
                 Fotos reais dos mini bolos prontos para entrega. As pessoas compram com os olhos e encomendam toda semana:
               </p>
             </div>
 
-            {/* Grid dos 4 Adesivos 3D com Sombras Realistas */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4 md:px-6 max-w-5xl mx-auto">
+            {/* Grid dos 4 Adesivos 3D Responsivo: 2 Colunas no Mobile para visual de catálogo moderno */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 md:gap-6 px-3 sm:px-4 md:px-6 max-w-5xl mx-auto">
               
               {/* Adesivo 1: Red Velvet */}
-              <div className="group bg-white rounded-3xl p-5 shadow-[0_12px_30px_rgba(100,40,15,0.12)] border-2 border-[#fcd34d]/40 flex flex-col items-center text-center relative hover:scale-105 hover:-rotate-1 transition-all duration-300">
-                <div className="absolute -top-3 -right-2 bg-[#e11d48] text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-full shadow-md z-10">
-                  REQUINTE GOURMET
+              <div className="group bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-5 shadow-[0_8px_24px_rgba(100,40,15,0.10)] border border-[#fcd34d]/50 flex flex-col items-center text-center relative hover:scale-105 transition-all duration-300">
+                <div className="absolute -top-2.5 sm:-top-3 right-1 sm:-right-2 bg-[#e11d48] text-white text-[8px] sm:text-[10px] font-black uppercase px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full shadow-md z-10">
+                  REQUINTE
                 </div>
                 
                 {/* 3D Sticker Image com Efeito Colado */}
-                <div className="w-full aspect-square flex items-center justify-center p-2 mb-3">
+                <div className="w-full aspect-square flex items-center justify-center p-1 sm:p-2 mb-2 sm:mb-3">
                   <img 
                     alt="Caseirinho Red Velvet Frutas Vermelhas Adesivo 3D" 
                     width="450" 
                     height="450" 
                     loading="lazy" 
                     decoding="async" 
-                    className="w-full h-auto object-contain filter drop-shadow-[0_14px_18px_rgba(180,40,40,0.25)] group-hover:scale-110 transition-transform duration-300" 
+                    className="w-full h-auto object-contain filter drop-shadow-[0_8px_14px_rgba(180,40,40,0.22)] group-hover:scale-105 transition-transform duration-300" 
                     src="./code_files/caseirinho_adesivo_redvelvet.webp" 
                   />
                 </div>
 
-                <span className="text-[11px] text-[#ea580c] font-black uppercase tracking-wider mb-1">Fórmula 01</span>
-                <h3 className="text-[17px] text-[#3e1f0e] font-black leading-tight mb-1">Red Velvet Frutas Vermelhas</h3>
-                <p className="text-[12px] text-[#6b4226] mb-3 leading-snug">Massa aveludada rubi com calda de cream cheese brilhante e morangos frescos.</p>
+                <span className="text-[9.5px] sm:text-[11px] text-[#ea580c] font-black uppercase tracking-wider mb-0.5">Fórmula 01</span>
+                <h3 className="text-[13px] sm:text-[17px] text-[#3e1f0e] font-black leading-tight mb-1 line-clamp-1 sm:line-clamp-none">Red Velvet Vermelhas</h3>
+                <p className="text-[10.5px] sm:text-[12px] text-[#6b4226] mb-2 sm:mb-3 leading-snug line-clamp-2">Massa rubi com cream cheese brilhante e morangos frescos.</p>
                 
-                <div className="mt-auto pt-2 border-t border-[#fed7aa]/50 w-full flex items-center justify-between text-[12px]">
+                <div className="mt-auto pt-2 border-t border-[#fed7aa]/50 w-full flex flex-col sm:flex-row items-center justify-between gap-1 text-[10px] sm:text-[12px]">
                   <span className="text-[#888] font-bold">Custo: <strong className="text-[#3e1f0e]">R$ 2,40</strong></span>
-                  <span className="text-[#059669] font-black bg-[#ecfdf5] px-2 py-0.5 rounded-lg">Venda: R$ 16,00</span>
+                  <span className="text-[#059669] font-black bg-[#ecfdf5] px-1.5 sm:px-2 py-0.5 rounded-md">Venda: R$ 16</span>
                 </div>
               </div>
 
               {/* Adesivo 2: Ninho & Morango Vulcão */}
-              <div className="group bg-white rounded-3xl p-5 shadow-[0_12px_30px_rgba(100,40,15,0.12)] border-2 border-[#fcd34d]/40 flex flex-col items-center text-center relative hover:scale-105 hover:rotate-1 transition-all duration-300">
-                <div className="absolute -top-3 -right-2 bg-[#d97706] text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-full shadow-md z-10">
-                  CAMPEÃO DE PEDIDOS
+              <div className="group bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-5 shadow-[0_8px_24px_rgba(100,40,15,0.10)] border border-[#fcd34d]/50 flex flex-col items-center text-center relative hover:scale-105 transition-all duration-300">
+                <div className="absolute -top-2.5 sm:-top-3 right-1 sm:-right-2 bg-[#d97706] text-white text-[8px] sm:text-[10px] font-black uppercase px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full shadow-md z-10">
+                  MAIS VENDIDO
                 </div>
 
-                <div className="w-full aspect-square flex items-center justify-center p-2 mb-3">
+                <div className="w-full aspect-square flex items-center justify-center p-1 sm:p-2 mb-2 sm:mb-3">
                   <img 
                     alt="Mini Bolo Vulcão Leite Ninho e Morango Adesivo 3D" 
                     width="450" 
                     height="450" 
                     loading="lazy" 
                     decoding="async" 
-                    className="w-full h-auto object-contain filter drop-shadow-[0_14px_18px_rgba(180,100,20,0.22)] group-hover:scale-110 transition-transform duration-300" 
+                    className="w-full h-auto object-contain filter drop-shadow-[0_8px_14px_rgba(180,100,20,0.22)] group-hover:scale-105 transition-transform duration-300" 
                     src="./code_files/caseirinho_adesivo_ninho.webp" 
                   />
                 </div>
 
-                <span className="text-[11px] text-[#ea580c] font-black uppercase tracking-wider mb-1">Fórmula 02</span>
-                <h3 className="text-[17px] text-[#3e1f0e] font-black leading-tight mb-1">Mini Vulcão Ninho & Nutella</h3>
-                <p className="text-[12px] text-[#6b4226] mb-3 leading-snug">Creme aveludado de Ninho que escorre no corte com fios de Nutella e raspas nobres.</p>
+                <span className="text-[9.5px] sm:text-[11px] text-[#ea580c] font-black uppercase tracking-wider mb-0.5">Fórmula 02</span>
+                <h3 className="text-[13px] sm:text-[17px] text-[#3e1f0e] font-black leading-tight mb-1 line-clamp-1 sm:line-clamp-none">Vulcão Ninho & Nutella</h3>
+                <p className="text-[10.5px] sm:text-[12px] text-[#6b4226] mb-2 sm:mb-3 leading-snug line-clamp-2">Creme aveludado de Ninho que escorre no corte com Nutella.</p>
                 
-                <div className="mt-auto pt-2 border-t border-[#fed7aa]/50 w-full flex items-center justify-between text-[12px]">
+                <div className="mt-auto pt-2 border-t border-[#fed7aa]/50 w-full flex flex-col sm:flex-row items-center justify-between gap-1 text-[10px] sm:text-[12px]">
                   <span className="text-[#888] font-bold">Custo: <strong className="text-[#3e1f0e]">R$ 2,10</strong></span>
-                  <span className="text-[#059669] font-black bg-[#ecfdf5] px-2 py-0.5 rounded-lg">Venda: R$ 15,00</span>
+                  <span className="text-[#059669] font-black bg-[#ecfdf5] px-1.5 sm:px-2 py-0.5 rounded-md">Venda: R$ 15</span>
                 </div>
               </div>
 
               {/* Adesivo 3: Meio a Meio / Bento Burger */}
-              <div className="group bg-white rounded-3xl p-5 shadow-[0_12px_30px_rgba(100,40,15,0.12)] border-2 border-[#fcd34d]/40 flex flex-col items-center text-center relative hover:scale-105 hover:-rotate-1 transition-all duration-300">
-                <div className="absolute -top-3 -right-2 bg-[#059669] text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-full shadow-md z-10">
-                  NA CAIXINHA DE HAMBÚRGUER
+              <div className="group bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-5 shadow-[0_8px_24px_rgba(100,40,15,0.10)] border border-[#fcd34d]/50 flex flex-col items-center text-center relative hover:scale-105 transition-all duration-300">
+                <div className="absolute -top-2.5 sm:-top-3 right-1 sm:-right-2 bg-[#059669] text-white text-[8px] sm:text-[10px] font-black uppercase px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full shadow-md z-10">
+                  HAMBÚRGUER
                 </div>
 
-                <div className="w-full aspect-square flex items-center justify-center p-2 mb-3">
+                <div className="w-full aspect-square flex items-center justify-center p-1 sm:p-2 mb-2 sm:mb-3">
                   <img 
                     alt="Caseirinho Meio a Meio Dois Amores Adesivo 3D" 
                     width="450" 
                     height="450" 
                     loading="lazy" 
                     decoding="async" 
-                    className="w-full h-auto object-contain filter drop-shadow-[0_14px_18px_rgba(50,30,10,0.25)] group-hover:scale-110 transition-transform duration-300" 
+                    className="w-full h-auto object-contain filter drop-shadow-[0_8px_14px_rgba(50,30,10,0.22)] group-hover:scale-105 transition-transform duration-300" 
                     src="./code_files/caseirinho_adesivo_meioameio.webp" 
                   />
                 </div>
 
-                <span className="text-[11px] text-[#ea580c] font-black uppercase tracking-wider mb-1">Fórmula 03</span>
-                <h3 className="text-[17px] text-[#3e1f0e] font-black leading-tight mb-1">Dois Amores Meio a Meio</h3>
-                <p className="text-[12px] text-[#6b4226] mb-3 leading-snug">Metade brigadeiro belga split e metade creme de leite em pó na marmitinha térmica.</p>
+                <span className="text-[9.5px] sm:text-[11px] text-[#ea580c] font-black uppercase tracking-wider mb-0.5">Fórmula 03</span>
+                <h3 className="text-[13px] sm:text-[17px] text-[#3e1f0e] font-black leading-tight mb-1 line-clamp-1 sm:line-clamp-none">Dois Amores Meio a Meio</h3>
+                <p className="text-[10.5px] sm:text-[12px] text-[#6b4226] mb-2 sm:mb-3 leading-snug line-clamp-2">Brigadeiro belga e leite em pó na caixinha térmica.</p>
                 
-                <div className="mt-auto pt-2 border-t border-[#fed7aa]/50 w-full flex items-center justify-between text-[12px]">
+                <div className="mt-auto pt-2 border-t border-[#fed7aa]/50 w-full flex flex-col sm:flex-row items-center justify-between gap-1 text-[10px] sm:text-[12px]">
                   <span className="text-[#888] font-bold">Custo: <strong className="text-[#3e1f0e]">R$ 1,95</strong></span>
-                  <span className="text-[#059669] font-black bg-[#ecfdf5] px-2 py-0.5 rounded-lg">Venda: R$ 15,00</span>
+                  <span className="text-[#059669] font-black bg-[#ecfdf5] px-1.5 sm:px-2 py-0.5 rounded-md">Venda: R$ 15</span>
                 </div>
               </div>
 
               {/* Adesivo 4: Cenoura Belga */}
-              <div className="group bg-white rounded-3xl p-5 shadow-[0_12px_30px_rgba(100,40,15,0.12)] border-2 border-[#fcd34d]/40 flex flex-col items-center text-center relative hover:scale-105 hover:rotate-1 transition-all duration-300">
-                <div className="absolute -top-3 -right-2 bg-[#ca8a04] text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-full shadow-md z-10">
-                  CLÁSSICO INFALÍVEL
+              <div className="group bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-5 shadow-[0_8px_24px_rgba(100,40,15,0.10)] border border-[#fcd34d]/50 flex flex-col items-center text-center relative hover:scale-105 transition-all duration-300">
+                <div className="absolute -top-2.5 sm:-top-3 right-1 sm:-right-2 bg-[#ca8a04] text-white text-[8px] sm:text-[10px] font-black uppercase px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full shadow-md z-10">
+                  CLÁSSICO
                 </div>
 
-                <div className="w-full aspect-square flex items-center justify-center p-2 mb-3">
+                <div className="w-full aspect-square flex items-center justify-center p-1 sm:p-2 mb-2 sm:mb-3">
                   <img 
                     alt="Mini Bolo Cenoura com Chocolate Belga Adesivo 3D" 
                     width="450" 
                     height="450" 
                     loading="lazy" 
                     decoding="async" 
-                    className="w-full h-auto object-contain filter drop-shadow-[0_14px_18px_rgba(200,90,20,0.25)] group-hover:scale-110 transition-transform duration-300" 
+                    className="w-full h-auto object-contain filter drop-shadow-[0_8px_14px_rgba(200,90,20,0.22)] group-hover:scale-105 transition-transform duration-300" 
                     src="./code_files/caseirinho_adesivo_cenoura.webp" 
                   />
                 </div>
 
-                <span className="text-[11px] text-[#ea580c] font-black uppercase tracking-wider mb-1">Fórmula 04</span>
-                <h3 className="text-[17px] text-[#3e1f0e] font-black leading-tight mb-1">Cenoura Vulcão Belga</h3>
-                <p className="text-[12px] text-[#6b4226] mb-3 leading-snug">Massa de cenoura super fofa com piscina farta de brigadeiro brilhante que não endurece.</p>
+                <span className="text-[9.5px] sm:text-[11px] text-[#ea580c] font-black uppercase tracking-wider mb-0.5">Fórmula 04</span>
+                <h3 className="text-[13px] sm:text-[17px] text-[#3e1f0e] font-black leading-tight mb-1 line-clamp-1 sm:line-clamp-none">Cenoura Vulcão Belga</h3>
+                <p className="text-[10.5px] sm:text-[12px] text-[#6b4226] mb-2 sm:mb-3 leading-snug line-clamp-2">Cenoura fofinha com piscina farta de brigadeiro brilhante.</p>
                 
-                <div className="mt-auto pt-2 border-t border-[#fed7aa]/50 w-full flex items-center justify-between text-[12px]">
+                <div className="mt-auto pt-2 border-t border-[#fed7aa]/50 w-full flex flex-col sm:flex-row items-center justify-between gap-1 text-[10px] sm:text-[12px]">
                   <span className="text-[#888] font-bold">Custo: <strong className="text-[#3e1f0e]">R$ 1,80</strong></span>
-                  <span className="text-[#059669] font-black bg-[#ecfdf5] px-2 py-0.5 rounded-lg">Venda: R$ 14,00</span>
+                  <span className="text-[#059669] font-black bg-[#ecfdf5] px-1.5 sm:px-2 py-0.5 rounded-md">Venda: R$ 14</span>
                 </div>
               </div>
 
@@ -504,6 +510,9 @@ function CaseirinhosPage({ onNavigateHome }) {
               <p className="text-[14px] md:text-[16px] text-[#666] max-w-lg mx-auto">
                 Mensagens reais e fotos de produção enviadas direto para a Chef Ju após colocarem as receitas para vender:
               </p>
+              <div className="inline-flex md:hidden items-center gap-1 text-[11px] font-black text-[#ea580c] bg-[#fff7ed] px-3 py-1 rounded-full border border-[#fed7aa] mt-2.5">
+                <span>👉 Deslize para o lado para ver todos os depoimentos</span>
+              </div>
             </div>
 
             {/* 3 Prints de WhatsApp Gerados */}
@@ -1133,10 +1142,31 @@ function CaseirinhosPage({ onNavigateHome }) {
         </div>
       </main>
 
-      {/* FAB Flutuante */}
+      {/* Barra de Conversão Fixa no Rodapé para Mobile */}
       {showFab && (
-        <a href="#ofertas" className="fixed bottom-4 right-4 z-50 bg-[#ea580c] text-white p-3.5 rounded-full shadow-2xl flex items-center justify-center animate-bounce">
-          <span className="material-symbols-outlined text-[28px]">savings</span>
+        <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-[#fed7aa] p-2.5 px-4 shadow-[0_-6px_25px_rgba(0,0,0,0.12)] md:hidden flex items-center justify-between gap-3">
+          <div className="flex flex-col text-left shrink-0">
+            <span className="text-[10px] text-[#c2410c] font-black uppercase tracking-wider">Apenas Hoje</span>
+            <div className="flex items-baseline gap-1">
+              <span className="text-[11px] text-[#999] line-through font-bold">R$67</span>
+              <span className="text-[22px] font-black text-[#059669] leading-none">R$14</span>
+            </div>
+          </div>
+          <a 
+            href="#ofertas" 
+            className="flex-1 max-w-[240px] h-[48px] rounded-full bg-gradient-to-r from-[#ea580c] via-[#f97316] to-[#059669] text-white flex items-center justify-center gap-1.5 text-[13.5px] font-black uppercase tracking-wider shadow-md shadow-[#ea580c]/30 active:scale-95 transition-transform text-center"
+          >
+            <span className="material-symbols-outlined text-[19px]">lock</span>
+            <span>QUERO MEU ACESSO</span>
+          </a>
+        </div>
+      )}
+
+      {/* FAB Flutuante no Desktop */}
+      {showFab && (
+        <a href="#ofertas" className="hidden md:flex fixed bottom-6 right-6 z-50 bg-[#ea580c] text-white py-3 px-5 rounded-full shadow-2xl items-center gap-2 hover:bg-[#c2410c] hover:scale-105 transition-all font-black text-[14px] uppercase tracking-wider">
+          <span className="material-symbols-outlined text-[24px]">monetization_on</span>
+          <span>QUERO MEU ACESSO POR R$ 14</span>
         </a>
       )}
 
