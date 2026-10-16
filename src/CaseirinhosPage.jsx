@@ -188,12 +188,12 @@ function CaseirinhosPage({ onNavigateHome }) {
               </div>
 
               {/* Right Column: Hero Image (Chef Ju com a foto real apontando para os Caseirinhos) */}
-              <div className="w-full relative max-w-[320px] sm:max-w-[360px] md:max-w-[450px] mb-4 md:mb-0 md:col-start-2 md:row-start-1 md:row-span-2 self-center flex justify-center">
-                <div className="relative">
+              <div className="w-full relative max-w-[340px] sm:max-w-[420px] md:max-w-[500px] mb-4 md:mb-0 md:col-start-2 md:row-start-1 md:row-span-2 self-center flex justify-center">
+                <div className="relative w-full">
                   <img 
                     alt="+120 Caseirinhos e Mini Bolos Lucrativos Chef Ju" 
-                    width="750" 
-                    height="750" 
+                    width="878" 
+                    height="635" 
                     fetchpriority="high" 
                     decoding="async" 
                     className="w-full h-auto rounded-3xl object-cover shadow-[0_8px_24px_rgba(0,0,0,0.15)] hover:scale-105 transition-transform duration-500 border border-[#ecd9cd]" 
