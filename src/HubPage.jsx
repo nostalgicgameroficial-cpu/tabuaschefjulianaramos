@@ -246,18 +246,6 @@ function HubPage({ onNavigate }) {
           </button>
         </div>
 
-        {/* ======================================================== */}
-        {/* CARD 5: SUPORTE & DÚVIDAS NO WHATSAPP */}
-        {/* ======================================================== */}
-        <a 
-          href="https://wa.me/5511999999999?text=Oi%20Chef%20Ju,%20tenho%20uma%20d%C3%BAvida%20sobre%20as%20receitas" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="w-full py-3.5 px-4 rounded-2xl bg-[#25d366] text-white text-[13.5px] font-black uppercase tracking-wider shadow-md active:scale-95 transition-transform flex items-center justify-center gap-2 cursor-pointer"
-        >
-          <span className="material-symbols-outlined text-[20px]">chat</span>
-          <span>Falar com o Suporte no WhatsApp</span>
-        </a>
 
         {/* Garantia & Segurança */}
         <div className="text-center pt-2">
