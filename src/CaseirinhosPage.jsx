@@ -170,7 +170,7 @@ function CaseirinhosPage({ onNavigateHome }) {
                 </div>
                 
                 <h1 className="text-[28px] sm:text-[34px] md:text-[42px] leading-[1.15] text-[#3e1f0e] font-black tracking-tight mb-2">
-                  + 60 Caseirinhos e Mini Bolos com <span className="text-[#ea580c]">Recheios Vulcão</span> <span style={{fontFamily: "'Dancing Script', cursive"}} className="text-[#059669] text-[32px] sm:text-[40px] md:text-[50px] inline-block font-bold">Com Mais de 600% de Lucro</span>
+                  + 120 Caseirinhos com <span className="text-[#ea580c]">Recheios Sem Fogo</span> <span style={{fontFamily: "'Dancing Script', cursive"}} className="text-[#059669] text-[32px] sm:text-[40px] md:text-[50px] inline-block font-bold">Com Mais de 600% de Lucro</span>
                 </h1>
 
                 <div className="flex items-center justify-center md:justify-start gap-3 mb-3 text-[#854d0e] text-[15px] md:text-[17px] font-serif italic font-bold">
@@ -203,7 +203,7 @@ function CaseirinhosPage({ onNavigateHome }) {
               {/* Subheadline & CTA */}
               <div className="flex flex-col items-center md:items-start text-center md:text-left md:col-start-1 md:row-start-2 w-full">
                 <p className="font-medium text-[15px] md:text-[17px] leading-relaxed text-[#5c3e2e] max-w-[340px] md:max-w-[440px] mx-auto md:mx-0 mb-6">
-                  Mais de 60 receitas e montagens de caseirinhos gourmet e mini bolos vulcão para você faturar de R$ 150 a R$ 300 por dia. Custo médio de R$ 2,00 e venda por R$ 15,00 com mais de 600% de lucro líquido feito na cozinha da sua casa.
+                  O método exclusivo com <strong>recheios cremosos sem levar ao fogão</strong>: processo muito mais fácil, 3x mais rápido, sem passar calor na panela e sem risco de empelotar. Produza na sua cozinha gastando R$ 2,00 e vendendo por R$ 15,00.
                 </p>
 
                 <a 
@@ -224,9 +224,9 @@ function CaseirinhosPage({ onNavigateHome }) {
             {/* 4 Selos de Lucro e Vantagens */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 max-w-4xl mx-auto mt-10 w-full relative z-10">
               {[
+                { icon: "soup_kitchen", title: "SEM FOGO", desc: "Recheios frios sem panela: mais fácil e rápido" },
                 { icon: "attach_money", title: "LUCRO DE +600%", desc: "Gaste R$ 2,00 por bolo e venda por R$ 15,00" },
                 { icon: "takeout_dining", title: "EMBALAGENS QUE VENDEM", desc: "Apresentação em blister e hambúrguer irresistível" },
-                { icon: "kitchen", title: "NA SUA COZINHA", desc: "Sem precisar de batedeira cara ou curso complexo" },
                 { icon: "schedule", title: "VENDA RÁPIDA", desc: "Perfeito para vender a pronta entrega no WhatsApp" }
               ].map((item, idx) => (
                 <div key={idx} className="bg-white p-3.5 rounded-2xl border-2 border-[#fed7aa]/60 shadow-md flex flex-col items-center text-center hover:border-[#ea580c] transition-colors">
@@ -235,6 +235,65 @@ function CaseirinhosPage({ onNavigateHome }) {
                   <p className="text-[11px] md:text-[12px] text-[#78350f] leading-tight font-medium">{item.desc}</p>
                 </div>
               ))}
+            </div>
+
+            {/* Destaque do Mecanismo Único: Recheios Sem Levar ao Fogão */}
+            <div className="w-full max-w-4xl mx-auto mt-6 bg-gradient-to-r from-[#fff7ed] via-white to-[#ecfdf5] border-2 border-[#ea580c]/30 rounded-3xl p-5 md:p-6 shadow-md flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left relative z-10">
+              <div className="flex items-center gap-3.5">
+                <div className="w-14 h-14 rounded-2xl bg-[#ea580c] text-white flex items-center justify-center shrink-0 shadow-md">
+                  <span className="material-symbols-outlined text-[32px]">soup_kitchen</span>
+                </div>
+                <div>
+                  <div className="inline-flex items-center gap-1 text-[#ea580c] text-[11px] font-black uppercase tracking-wider mb-0.5">
+                    <span>⚡ MECANISMO ÚNICO & EXCLUSIVO</span>
+                  </div>
+                  <h3 className="text-[17px] md:text-[19px] font-black text-[#3e1f0e] leading-snug">
+                    Recheios Cremosos Sem Levar ao Fogão!
+                  </h3>
+                  <p className="text-[12px] md:text-[13px] text-[#6b4226] leading-tight">
+                    Esqueça passar calor na beira do fogão mexendo panela quente. Recheios aveludados que não queimam, não empelotam, economizam seu gás e aceleram sua produção em até 3x.
+                  </p>
+                </div>
+              </div>
+              <div className="shrink-0">
+                <span className="bg-[#059669] text-white text-[12px] font-black px-4 py-2 rounded-full uppercase tracking-wide shadow-sm inline-block">
+                  Processo Fácil & Rápido
+                </span>
+              </div>
+            </div>
+
+            {/* Checklist dos 5 Entregáveis Principais */}
+            <div className="w-full max-w-4xl mx-auto mt-6 bg-white border-2 border-[#059669] rounded-3xl p-5 md:p-8 shadow-xl text-left relative z-10">
+              <div className="inline-flex items-center gap-1.5 bg-[#059669] text-white text-[10px] sm:text-[11px] font-black uppercase px-3.5 py-1 rounded-full shadow-sm mb-3">
+                <span>📦 TUDO O QUE VOCÊ VAI RECEBER</span>
+              </div>
+              
+              <h3 className="text-[20px] sm:text-[24px] font-black text-[#3e1f0e] mb-4">
+                O Pacote Completo Para Começar a Faturar Hoje:
+              </h3>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[14px] sm:text-[15px] font-bold text-[#3e1f0e]">
+                <div className="flex items-center gap-2.5 bg-[#f0fdf4] p-3 rounded-2xl border border-[#bbf7d0]">
+                  <span className="text-[20px]">✅</span>
+                  <span>120 receitas de caseirinhos</span>
+                </div>
+                <div className="flex items-center gap-2.5 bg-[#f0fdf4] p-3 rounded-2xl border border-[#bbf7d0]">
+                  <span className="text-[20px]">✅</span>
+                  <span>100 recheios irresistíveis (sem fogo)</span>
+                </div>
+                <div className="flex items-center gap-2.5 bg-[#f0fdf4] p-3 rounded-2xl border border-[#bbf7d0]">
+                  <span className="text-[20px]">✅</span>
+                  <span>50 massas de bolo fofinhas e lucrativas</span>
+                </div>
+                <div className="flex items-center gap-2.5 bg-[#f0fdf4] p-3 rounded-2xl border border-[#bbf7d0]">
+                  <span className="text-[20px]">✅</span>
+                  <span>Apostila de precificação (saiba quanto cobrar)</span>
+                </div>
+                <div className="flex items-center gap-2.5 bg-[#fef2f2] p-3 rounded-2xl border border-[#fecaca] sm:col-span-2">
+                  <span className="text-[20px]">🎄</span>
+                  <span>Receitas especiais para o Natal</span>
+                </div>
+              </div>
             </div>
 
           </section>
@@ -561,14 +620,14 @@ function CaseirinhosPage({ onNavigateHome }) {
               {/* Left Column */}
               <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
                 <div className="mb-3">
-                  <div className="text-[54px] md:text-[76px] font-black text-[#ea580c] leading-none mb-1">+60</div>
+                  <div className="text-[54px] md:text-[76px] font-black text-[#ea580c] leading-none mb-1">+120</div>
                   <h2 className="text-[24px] md:text-[36px] font-black text-[#3e1f0e] leading-tight mb-3">
-                    receitas de caseirinhos gourmet, mini vulcões e <span style={{fontFamily: "'Dancing Script', cursive"}} className="text-[#d97706] text-[34px] md:text-[46px]">recheios cremosos</span>!
+                    receitas de caseirinhos gourmet, 50 massas fofinhas e <span style={{fontFamily: "'Dancing Script', cursive"}} className="text-[#059669] text-[34px] md:text-[46px]">100 recheios sem fogo</span>!
                   </h2>
                 </div>
 
                 <p className="text-[15px] md:text-[17px] font-medium text-[#6b4226] mb-6">
-                  Tudo testado e padronizado para você produzir em escala na cozinha de casa com o menor custo e maior lucro por unidade.
+                  Com o mecanismo de recheios frios sem ir ao fogão, você produz muito mais rápido, sem cansaço e sem desperdício de gás.
                 </p>
 
                 <a href="#ofertas" className="w-full max-w-[360px] h-[60px] rounded-full bg-[#ea580c] text-white flex items-center justify-center gap-2 text-[18px] font-black uppercase tracking-wide shadow-[0_8px_20px_rgba(234,88,12,0.35)] active:scale-95 transition-transform hidden md:flex">
@@ -746,23 +805,23 @@ function CaseirinhosPage({ onNavigateHome }) {
                     <div className="flex flex-col gap-2 mb-4 text-[12px] leading-snug text-[#5c3e2e]">
                       <div className="flex items-start gap-1.5">
                         <span className="material-symbols-outlined text-[16px] text-[#059669] font-bold shrink-0 mt-0.5">check_circle</span>
-                        <span>+60 Receitas de Caseirinhos & Mini Bolos</span>
+                        <span>120 Receitas de Caseirinhos Lucrativos</span>
                       </div>
                       <div className="flex items-start gap-1.5">
                         <span className="material-symbols-outlined text-[16px] text-[#059669] font-bold shrink-0 mt-0.5">check_circle</span>
-                        <span>Massas Fofinhas que Não Murcham</span>
+                        <span>100 Recheios Irresistíveis Sem Fogo</span>
                       </div>
                       <div className="flex items-start gap-1.5">
                         <span className="material-symbols-outlined text-[16px] text-[#059669] font-bold shrink-0 mt-0.5">check_circle</span>
-                        <span>Coberturas Vulcão Aveludadas</span>
+                        <span>50 Massas Fofinhas e Rentáveis</span>
                       </div>
                       <div className="flex items-start gap-1.5">
                         <span className="material-symbols-outlined text-[16px] text-[#059669] font-bold shrink-0 mt-0.5">check_circle</span>
-                        <span>Acesso Imediato e Vitalício</span>
+                        <span>Apostila de Precificação (Saiba Quanto Cobrar)</span>
                       </div>
                       <div className="flex items-start gap-1.5">
                         <span className="material-symbols-outlined text-[16px] text-[#059669] font-bold shrink-0 mt-0.5">check_circle</span>
-                        <span>Entrega por E-mail e WhatsApp</span>
+                        <span>Receitas Especiais para o Natal</span>
                       </div>
                     </div>
                   </div>
