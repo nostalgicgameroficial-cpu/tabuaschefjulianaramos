@@ -560,7 +560,7 @@ function CaseirinhosPage({ onNavigateHome }) {
                     loading="lazy" 
                     decoding="async" 
                     className="w-full h-auto rounded-2xl object-contain shadow-inner" 
-                    src="./code_files/depoimento_whats_caseirinho_2.webp" 
+                    src="./code_files/depoimento_whats_caseirinho_2_v2.webp" 
                   />
                 </div>
                 <div className="p-3 bg-[#fff7ed] text-center border-t border-[#fed7aa]/40">
