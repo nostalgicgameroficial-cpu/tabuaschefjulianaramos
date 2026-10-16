@@ -207,10 +207,10 @@ function CaseirinhosPage({ onNavigateHome }) {
                 </p>
 
                 <a 
-                  className="w-full max-w-[340px] md:max-w-[400px] h-[64px] rounded-full bg-[#059669] text-white flex items-center justify-center gap-2 text-[20px] md:text-[22px] font-black uppercase tracking-wide shadow-[0_8px_20px_rgba(5,150,105,0.3)] active:scale-95 transition-transform" 
+                  className="w-full max-w-[340px] sm:max-w-[400px] min-h-[58px] sm:min-h-[64px] py-3.5 px-4 rounded-full bg-[#059669] text-white flex items-center justify-center gap-2 text-[17px] sm:text-[20px] font-black uppercase tracking-wide shadow-[0_8px_20px_rgba(5,150,105,0.3)] active:scale-95 transition-transform text-center" 
                   href="#ofertas"
                 >
-                  <span className="material-symbols-outlined text-[28px]">lock</span>
+                  <span className="material-symbols-outlined text-[24px] sm:text-[28px]">lock</span>
                   <span>QUERO MEU ACESSO</span>
                 </a>
                 <span className="text-[12px] md:text-[14px] font-bold text-[#854d0e] flex items-center justify-center md:justify-start gap-1 mt-4 w-full md:max-w-[400px]">
@@ -596,13 +596,21 @@ function CaseirinhosPage({ onNavigateHome }) {
                   ))}
                 </div>
 
-                <a href="#ofertas" className="w-full max-w-[340px] h-[56px] rounded-full bg-[#ea580c] text-white flex items-center justify-center gap-2 text-[17px] font-black uppercase tracking-wide shadow-lg shadow-[#ea580c]/30 active:scale-95 transition-transform md:hidden">
+                <a href="#ofertas" className="w-full max-w-sm h-[54px] rounded-full bg-[#ea580c] text-white flex items-center justify-center gap-2 text-[16px] sm:text-[17px] font-black uppercase tracking-wide shadow-lg shadow-[#ea580c]/30 active:scale-95 transition-transform md:hidden px-4 text-center">
                   QUERO TODAS AS RECEITAS
                 </a>
               </div>
 
             </div>
           </section>
+
+          {/* Botão de Ancoragem antes dos Bônus */}
+          <div className="w-full max-w-md mx-auto py-4 px-4 text-center">
+            <a href="#ofertas" className="w-full h-[56px] rounded-full bg-[#059669] text-white flex items-center justify-center gap-2 text-[16px] sm:text-[18px] font-black uppercase tracking-wide shadow-[0_6px_20px_rgba(5,150,105,0.3)] active:scale-95 transition-transform px-4">
+              <span className="material-symbols-outlined text-[24px]">lock</span>
+              <span>QUERO GARANTIR MEU DESCONTO</span>
+            </a>
+          </div>
 
           {/* 8. Bônus Exclusivos de Renda Extra */}
           <section className="px-4 py-12 md:py-20 bg-[#fffaf3]" id="bonus">
@@ -623,16 +631,16 @@ function CaseirinhosPage({ onNavigateHome }) {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8 max-w-md md:max-w-5xl mx-auto mb-8 items-stretch">
                 
                 {/* Bônus 1: Precificação */}
-                <div className="bg-white rounded-3xl p-5 shadow-lg border-2 border-[#fed7aa] flex flex-col items-center text-center relative overflow-hidden">
+                <div className="bg-white rounded-3xl p-4 sm:p-5 shadow-lg border-2 border-[#fed7aa] flex flex-col items-center text-center relative overflow-hidden">
                   <div className="absolute top-0 left-0 bg-[#ea580c] text-white text-[10px] font-black uppercase px-3 py-1 rounded-br-xl shadow-sm z-10">
                     BÔNUS 1
                   </div>
                   
-                  <div className="w-16 h-16 rounded-2xl bg-[#ffedd5] flex items-center justify-center my-4 text-[#ea580c]">
-                    <span className="material-symbols-outlined text-[34px]">calculate</span>
+                  <div className="w-full max-w-[240px] sm:max-w-[260px] h-[170px] sm:h-[180px] my-3 overflow-hidden rounded-2xl shadow-sm flex items-center justify-center bg-[#faf6f2]">
+                    <img src="./code_files/bonus_caseirinhos_precificacao.webp" alt="Guia de Precificação & Custos na Ponta do Lápis" width="500" height="375" loading="lazy" decoding="async" className="w-full h-full object-cover rounded-2xl" />
                   </div>
 
-                  <h4 className="text-[16px] font-black text-[#3e1f0e] leading-tight mb-2">
+                  <h4 className="text-[15px] sm:text-[16px] font-black text-[#3e1f0e] leading-tight mb-2">
                     Calculadora & Ficha de Precificação Descomplicada
                   </h4>
                   <p className="text-[12px] text-[#6b4226] leading-relaxed mb-4">
@@ -648,16 +656,16 @@ function CaseirinhosPage({ onNavigateHome }) {
                 </div>
 
                 {/* Bônus 2: Etiquetas & Tags Prontas */}
-                <div className="bg-white rounded-3xl p-5 shadow-lg border-2 border-[#fed7aa] flex flex-col items-center text-center relative overflow-hidden">
+                <div className="bg-white rounded-3xl p-4 sm:p-5 shadow-lg border-2 border-[#fed7aa] flex flex-col items-center text-center relative overflow-hidden">
                   <div className="absolute top-0 left-0 bg-[#ea580c] text-white text-[10px] font-black uppercase px-3 py-1 rounded-br-xl shadow-sm z-10">
                     BÔNUS 2
                   </div>
 
-                  <div className="w-16 h-16 rounded-2xl bg-[#ffedd5] flex items-center justify-center my-4 text-[#ea580c]">
-                    <span className="material-symbols-outlined text-[34px]">label</span>
+                  <div className="w-full max-w-[240px] sm:max-w-[260px] h-[170px] sm:h-[180px] my-3 overflow-hidden rounded-2xl shadow-sm flex items-center justify-center bg-[#faf6f2]">
+                    <img src="./code_files/bonus_caseirinhos_etiquetas.webp" alt="Pack de Etiquetas e Tags Prontas para Imprimir" width="500" height="375" loading="lazy" decoding="async" className="w-full h-full object-cover rounded-2xl" />
                   </div>
 
-                  <h4 className="text-[16px] font-black text-[#3e1f0e] leading-tight mb-2">
+                  <h4 className="text-[15px] sm:text-[16px] font-black text-[#3e1f0e] leading-tight mb-2">
                     Pack de Etiquetas e Tags Prontas para Imprimir
                   </h4>
                   <p className="text-[12px] text-[#6b4226] leading-relaxed mb-4">
@@ -673,16 +681,16 @@ function CaseirinhosPage({ onNavigateHome }) {
                 </div>
 
                 {/* Bônus 3: Manual de Vendas no WhatsApp */}
-                <div className="bg-white rounded-3xl p-5 shadow-lg border-2 border-[#fed7aa] flex flex-col items-center text-center relative overflow-hidden">
+                <div className="bg-white rounded-3xl p-4 sm:p-5 shadow-lg border-2 border-[#fed7aa] flex flex-col items-center text-center relative overflow-hidden">
                   <div className="absolute top-0 left-0 bg-[#ea580c] text-white text-[10px] font-black uppercase px-3 py-1 rounded-br-xl shadow-sm z-10">
                     BÔNUS 3
                   </div>
 
-                  <div className="w-16 h-16 rounded-2xl bg-[#ffedd5] flex items-center justify-center my-4 text-[#ea580c]">
-                    <span className="material-symbols-outlined text-[34px]">send</span>
+                  <div className="w-full max-w-[240px] sm:max-w-[260px] h-[170px] sm:h-[180px] my-3 overflow-hidden rounded-2xl shadow-sm flex items-center justify-center bg-[#faf6f2]">
+                    <img src="./code_files/bonus_caseirinhos_vendas.webp" alt="Roteiro de Vendas Rápidas no WhatsApp & Bairro" width="500" height="375" loading="lazy" decoding="async" className="w-full h-full object-cover rounded-2xl" />
                   </div>
 
-                  <h4 className="text-[16px] font-black text-[#3e1f0e] leading-tight mb-2">
+                  <h4 className="text-[15px] sm:text-[16px] font-black text-[#3e1f0e] leading-tight mb-2">
                     Roteiro de Vendas Rápidas no WhatsApp & Bairro
                   </h4>
                   <p className="text-[12px] text-[#6b4226] leading-relaxed mb-4">
@@ -763,11 +771,11 @@ function CaseirinhosPage({ onNavigateHome }) {
                     <span className="text-[11px] text-[#c2410c] line-through font-bold block">De R$ 67,00 por apenas</span>
                     <div className="text-[38px] font-black text-[#059669] leading-none my-1.5">R$ 14</div>
                     <a 
-                      className="w-full py-3 px-2 rounded-xl bg-[#059669] text-white text-[13px] font-black text-center block shadow-md shadow-[#059669]/20 active:scale-95 transition-transform uppercase tracking-wider cursor-pointer"
+                      className="w-full py-4 px-3 min-h-[52px] rounded-2xl bg-[#059669] text-white text-[14px] sm:text-[15px] font-black text-center flex items-center justify-center gap-2 shadow-md shadow-[#059669]/25 active:scale-95 transition-transform uppercase tracking-wider cursor-pointer"
                       href="#checkout-basico"
                       onClick={(e) => handleCheckoutClick(e, 'https://lastlink.com/p/checkout-caseirinhos-basico/', 'Guia Caseirinhos Básico R$ 14', 14)}
                     >
-                      QUERO O BÁSICO (R$ 14)
+                      <span>QUERO O BÁSICO (R$ 14)</span>
                     </a>
                   </div>
                 </div>
@@ -833,11 +841,11 @@ function CaseirinhosPage({ onNavigateHome }) {
                     <span className="text-[11px] text-[#c2410c] line-through font-bold block">De R$ 147,00 por apenas</span>
                     <div className="text-[38px] font-black text-[#ea580c] leading-none my-1.5">R$ 27</div>
                     <a 
-                      className="w-full py-3.5 px-2 rounded-xl bg-gradient-to-r from-[#ea580c] via-[#f97316] to-[#d97706] text-white text-[13px] font-black text-center block shadow-lg shadow-[#ea580c]/30 active:scale-95 transition-transform uppercase tracking-wider animate-pulse cursor-pointer"
+                      className="w-full py-4 px-3 min-h-[54px] rounded-2xl bg-gradient-to-r from-[#ea580c] via-[#f97316] to-[#d97706] text-white text-[14px] sm:text-[15px] font-black text-center flex items-center justify-center gap-2 shadow-lg shadow-[#ea580c]/35 active:scale-95 transition-transform uppercase tracking-wider animate-pulse cursor-pointer"
                       href="#checkout-completo"
                       onClick={(e) => handleCheckoutClick(e, 'https://lastlink.com/p/checkout-caseirinhos-completo/', 'Combo Caseirinhos VIP Completo R$ 27', 27)}
                     >
-                      QUERO O COMPLETO VIP (R$ 27)
+                      <span>QUERO O COMPLETO VIP (R$ 27)</span>
                     </a>
                   </div>
                 </div>
