@@ -1,20 +1,54 @@
 import React, { useEffect, useState } from 'react';
 import { initMetaParameterSetup, generateCapiPayload, hashData } from './metaParameterSetup';
 import MemberApp from './MemberApp';
+import SobremesasPage from './SobremesasPage';
 
 function App() {
   const [showFab, setShowFab] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [visitorId, setVisitorId] = useState('');
   const [fbclid, setFbclid] = useState('');
-  const [viewMode, setViewMode] = useState('sales'); // 'sales' | 'app'
+  const [viewMode, setViewMode] = useState('sales'); // 'sales' | 'app' | 'sobremesas90'
 
-  // Check URL parameter for ?app=true or ?view=app
+  // Check URL pathname, query parameters or hash for routing
   useEffect(() => {
+    const path = window.location.pathname.toLowerCase();
+    const hash = window.location.hash.toLowerCase();
     const params = new URLSearchParams(window.location.search);
-    if (params.get('app') === 'true' || params.get('view') === 'app' || window.location.hash === '#app') {
+
+    if (
+      path.includes('sobremesas90') || 
+      path.includes('sobremesas') ||
+      hash.includes('sobremesas90') || 
+      params.get('page') === 'sobremesas90' || 
+      params.get('p') === 'sobremesas90'
+    ) {
+      setViewMode('sobremesas90');
+    } else if (params.get('app') === 'true' || params.get('view') === 'app' || hash === '#app') {
       setViewMode('app');
     }
+
+    // Listen to popstate for back/forward navigation
+    const handlePopState = () => {
+      const currentPath = window.location.pathname.toLowerCase();
+      const currentHash = window.location.hash.toLowerCase();
+      const currentParams = new URLSearchParams(window.location.search);
+
+      if (
+        currentPath.includes('sobremesas90') || 
+        currentPath.includes('sobremesas') ||
+        currentHash.includes('sobremesas90') || 
+        currentParams.get('page') === 'sobremesas90'
+      ) {
+        setViewMode('sobremesas90');
+      } else if (currentParams.get('app') === 'true' || currentHash === '#app') {
+        setViewMode('app');
+      } else {
+        setViewMode('sales');
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
   // 1. Scroll Handler for FAB
@@ -227,6 +261,10 @@ function App() {
       toggles.forEach(btn => btn.removeEventListener('click', handleClick));
     };
   }, []);
+
+  if (viewMode === 'sobremesas90') {
+    return <SobremesasPage onNavigateHome={() => setViewMode('sales')} />;
+  }
 
   if (viewMode === 'app') {
     return <MemberApp onBackToSalesPage={() => setViewMode('sales')} />;

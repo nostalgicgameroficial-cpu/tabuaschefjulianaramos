@@ -3,19 +3,19 @@ import React, { useState } from 'react';
 // REAL STEP-BY-STEP ASSEMBLY IMAGES (Generated realistic food photography)
 const STEP_IMAGES_SETS = [
   [
-    './code_files/step_real_1.png', 
-    './code_files/step_real_2.png', 
-    './code_files/step_real_3.png', 
-    './code_files/step_real_4.png', 
-    './code_files/step_real_5.png', 
+    './code_files/step_real_1.png',
+    './code_files/step_real_2.png',
+    './code_files/step_real_3.png',
+    './code_files/step_real_4.png',
+    './code_files/step_real_5.png',
     './code_files/step_real_6.png'
   ],
   [
-    './code_files/step1.webp', 
-    './code_files/step2.webp', 
-    './code_files/step3.webp', 
-    './code_files/step4.webp', 
-    './code_files/step5.webp', 
+    './code_files/step1.webp',
+    './code_files/step2.webp',
+    './code_files/step3.webp',
+    './code_files/step4.webp',
+    './code_files/step5.webp',
     './code_files/step6.webp'
   ]
 ];
@@ -72,17 +72,17 @@ const generate90Recipes = () => {
     const template = recipeTemplates[i % recipeTemplates.length];
     const cat = categories[i % categories.length];
     const cover = baseCoverImages[i % baseCoverImages.length];
-    
+
     // Add variations to make each of the 90 recipes unique
     const uniqueSuffix = Math.floor(i / recipeTemplates.length) + 1;
-    const recipeName = i < recipeTemplates.length 
-      ? template.title 
+    const recipeName = i < recipeTemplates.length
+      ? template.title
       : `${template.title} (Versão ${uniqueSuffix})`;
-      
+
     const imgSet = STEP_IMAGES_SETS[i % 2];
     const cheeseOptions = ['Brie', 'Gouda', 'Gorgonzola', 'Parmesão', 'Provolone', 'Muçarela de Búfala'];
     const fruitOptions = ['Uvas verdes', 'Morangos', 'Figos', 'Damascos', 'Cerejas', 'Tâmaras'];
-    
+
     const cheese1 = cheeseOptions[i % cheeseOptions.length];
     const fruit1 = fruitOptions[(i + 1) % fruitOptions.length];
     const fruit2 = fruitOptions[(i + 2) % fruitOptions.length];
@@ -106,41 +106,41 @@ const generate90Recipes = () => {
         { name: 'Decoração com ramos de alecrim fresco', checked: false }
       ],
       steps: [
-        { 
-          step: 1, 
-          title: 'Passo 1: Prepare a base', 
-          desc: `Escolha uma tábua limpa. Posicione ramos de alecrim para criar uma moldura e prepare o espaço para o ${cheese1}.`, 
-          img: imgSet[0] 
+        {
+          step: 1,
+          title: 'Passo 1: Prepare a base',
+          desc: `Escolha uma tábua limpa. Posicione ramos de alecrim para criar uma moldura e prepare o espaço para o ${cheese1}.`,
+          img: imgSet[0]
         },
-        { 
-          step: 2, 
-          title: 'Passo 2: Distribua os queijos', 
-          desc: `Posicione os queijos em pontos estratégicos. O ${cheese1} será o destaque principal, coloque-o no centro ou nas pontas.`, 
-          img: imgSet[1] 
+        {
+          step: 2,
+          title: 'Passo 2: Distribua os queijos',
+          desc: `Posicione os queijos em pontos estratégicos. O ${cheese1} será o destaque principal, coloque-o no centro ou nas pontas.`,
+          img: imgSet[1]
         },
-        { 
-          step: 3, 
-          title: 'Passo 3: Adicione os frios', 
-          desc: 'Monte rosas de salame usando a borda de um copo e faça sanfonas dobrando o presunto parma ao meio.', 
-          img: imgSet[2] 
+        {
+          step: 3,
+          title: 'Passo 3: Adicione os frios',
+          desc: 'Monte rosas de salame usando a borda de um copo e faça sanfonas dobrando o presunto parma ao meio.',
+          img: imgSet[2]
         },
-        { 
-          step: 4, 
-          title: 'Passo 4: Inclua as frutas', 
-          desc: `Preencha os espaços vazios com ${fruit1} e ${fruit2}. O contraste de cores deixará sua tábua maravilhosa.`, 
-          img: imgSet[3] 
+        {
+          step: 4,
+          title: 'Passo 4: Inclua as frutas',
+          desc: `Preencha os espaços vazios com ${fruit1} e ${fruit2}. O contraste de cores deixará sua tábua maravilhosa.`,
+          img: imgSet[3]
         },
-        { 
-          step: 5, 
-          title: 'Passo 5: Adicione torradas e potinhos', 
-          desc: 'Coloque pequenos potes com geleia e mel. Disponha as torradas artesanais em semicírculos.', 
-          img: imgSet[4] 
+        {
+          step: 5,
+          title: 'Passo 5: Adicione torradas e potinhos',
+          desc: 'Coloque pequenos potes com geleia e mel. Disponha as torradas artesanais em semicírculos.',
+          img: imgSet[4]
         },
-        { 
-          step: 6, 
-          title: 'Passo 6: Decoração final', 
-          desc: 'Finalize polvilhando ervas frescas e arrume os cantinhos. Sirva imediatamente!', 
-          img: imgSet[5] 
+        {
+          step: 6,
+          title: 'Passo 6: Decoração final',
+          desc: 'Finalize polvilhando ervas frescas e arrume os cantinhos. Sirva imediatamente!',
+          img: imgSet[5]
         }
       ]
     });
@@ -199,7 +199,7 @@ export default function MemberApp({ onBackToSalesPage }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [passwordInput, setPasswordInput] = useState('');
   const [passwordError, setPasswordError] = useState(false);
-  
+
   const [activeTab, setActiveTab] = useState('fichas');
   const [selectedCategory, setSelectedCategory] = useState('Todas');
   const [selectedRecipe, setSelectedRecipe] = useState(null);
@@ -212,7 +212,7 @@ export default function MemberApp({ onBackToSalesPage }) {
     const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
     const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-    
+
     if (hashHex === '89df62e636d06994a0431bad81a04ffd69f6fa1aa8198a8f1b8874768971126a') {
       setIsAuthenticated(true);
       setPasswordError(false);
@@ -252,7 +252,7 @@ export default function MemberApp({ onBackToSalesPage }) {
           <p className="text-[14px] text-[#5a4843] mb-6">Insira a senha de acesso para continuar.</p>
           <form onSubmit={handleLogin} className="flex flex-col gap-4">
             <div>
-              <input 
+              <input
                 type="password"
                 value={passwordInput}
                 onChange={e => setPasswordInput(e.target.value)}
@@ -293,7 +293,7 @@ export default function MemberApp({ onBackToSalesPage }) {
           </div>
         </div>
 
-        <button 
+        <button
           onClick={onBackToSalesPage}
           className="bg-white/10 hover:bg-white/20 text-white text-[11px] font-extrabold px-3 py-1.5 rounded-full border border-white/20 flex items-center gap-1 transition-all"
         >
@@ -304,7 +304,7 @@ export default function MemberApp({ onBackToSalesPage }) {
 
       {/* Main Content Area */}
       <main className="max-w-4xl mx-auto w-full px-4 pt-4 flex-grow">
-        
+
         {/* Welcome Banner */}
         <div className="bg-gradient-to-r from-[#c02f23] to-[#e86b24] text-white rounded-3xl p-5 shadow-lg mb-6 relative overflow-hidden">
           <div className="relative z-10">
@@ -331,11 +331,10 @@ export default function MemberApp({ onBackToSalesPage }) {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-1.5 px-4 py-2.5 rounded-2xl text-[13px] font-extrabold whitespace-nowrap transition-all shadow-sm ${
-                activeTab === tab.id 
-                  ? 'bg-[#1a9e38] text-white shadow-md scale-105' 
+              className={`flex items-center gap-1.5 px-4 py-2.5 rounded-2xl text-[13px] font-extrabold whitespace-nowrap transition-all shadow-sm ${activeTab === tab.id
+                  ? 'bg-[#1a9e38] text-white shadow-md scale-105'
                   : 'bg-white text-[#5a4843] border border-[#e8d8cb] hover:bg-[#faf4ee]'
-              }`}
+                }`}
             >
               <span className="material-symbols-outlined text-[18px]">{tab.icon}</span>
               <span>{tab.label}</span>
@@ -350,9 +349,9 @@ export default function MemberApp({ onBackToSalesPage }) {
             <div className="mb-6 flex flex-col gap-3">
               <div className="relative w-full">
                 <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[#8c7b77]">search</span>
-                <input 
-                  type="text" 
-                  placeholder="Buscar entre as 90 tábuas por nome ou ingrediente..." 
+                <input
+                  type="text"
+                  placeholder="Buscar entre as 90 tábuas por nome ou ingrediente..."
                   value={searchTerm}
                   onChange={e => setSearchTerm(e.target.value)}
                   className="w-full bg-white border border-[#e8d8cb] rounded-2xl pl-10 pr-4 py-3 text-[13.5px] text-[#333] focus:outline-none focus:border-[#1a9e38] shadow-sm"
@@ -364,11 +363,10 @@ export default function MemberApp({ onBackToSalesPage }) {
                   <button
                     key={cat}
                     onClick={() => setSelectedCategory(cat)}
-                    className={`px-3.5 py-1.5 rounded-full text-[11.5px] font-bold whitespace-nowrap transition-all ${
-                      selectedCategory === cat 
-                        ? 'bg-[#c02f23] text-white shadow-md' 
+                    className={`px-3.5 py-1.5 rounded-full text-[11.5px] font-bold whitespace-nowrap transition-all ${selectedCategory === cat
+                        ? 'bg-[#c02f23] text-white shadow-md'
                         : 'bg-white text-[#666] border border-[#eee] hover:border-[#ccc]'
-                    }`}
+                      }`}
                   >
                     {cat}
                   </button>
@@ -386,17 +384,17 @@ export default function MemberApp({ onBackToSalesPage }) {
             {/* Recipe Cards Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4.5 mb-8">
               {filteredRecipes.map(recipe => (
-                <div 
+                <div
                   key={recipe.id}
                   onClick={() => setSelectedRecipe(recipe)}
                   className="bg-white rounded-3xl overflow-hidden border border-[#eedfd3] shadow-md hover:shadow-xl transition-all cursor-pointer flex flex-col justify-between group"
                 >
                   <div>
                     <div className="relative aspect-[4/3] overflow-hidden bg-[#faf4ee]">
-                      <img 
-                        src={recipe.image} 
-                        alt={recipe.title} 
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                      <img
+                        src={recipe.image}
+                        alt={recipe.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                       <span className="absolute top-3 left-3 bg-[#1c3a27]/90 text-white text-[9.5px] font-black uppercase px-2.5 py-1 rounded-full backdrop-blur-sm shadow-sm">
                         {recipe.category}
@@ -410,7 +408,7 @@ export default function MemberApp({ onBackToSalesPage }) {
                       <p className="text-[12px] text-[#666] leading-snug mb-3 line-clamp-2">
                         {recipe.subtitle}
                       </p>
-                      
+
                       <div className="flex items-center gap-2 text-[11px] text-[#888] font-bold border-t border-[#f5eae0] pt-2.5">
                         <span className="material-symbols-outlined text-[14px] text-[#1a9e38]">group</span>
                         <span>{recipe.servings}</span>
@@ -461,7 +459,7 @@ export default function MemberApp({ onBackToSalesPage }) {
                     </ul>
                   )}
 
-                  <button 
+                  <button
                     onClick={() => {
                       if (bonus.id === 'b-2') setActiveTab('lista');
                       else alert(`Abrindo material exclusivo: ${bonus.title}`);
@@ -484,7 +482,7 @@ export default function MemberApp({ onBackToSalesPage }) {
                 <h3 className="text-[18px] font-black text-[#1c3a27]">Lista de Supermercado Inteligente</h3>
                 <p className="text-[12px] text-[#666]">Marque os ingredientes no celular enquanto faz suas compras no mercado:</p>
               </div>
-              <button 
+              <button
                 onClick={() => setUserChecklist(SHOPPING_CHECKLIST_DEFAULT)}
                 className="text-[11px] text-[#c02f23] font-bold underline shrink-0"
               >
@@ -504,17 +502,16 @@ export default function MemberApp({ onBackToSalesPage }) {
                     {cat.items.map((item, itemIdx) => {
                       const isChecked = cat.checkedState && cat.checkedState[itemIdx];
                       return (
-                        <label 
+                        <label
                           key={itemIdx}
                           onClick={() => toggleChecklistItem(catIdx, itemIdx)}
-                          className={`flex items-center gap-2.5 p-2 rounded-xl text-[12.5px] cursor-pointer transition-colors ${
-                            isChecked ? 'bg-emerald-50 text-[#888] line-through' : 'bg-white text-[#333] shadow-sm'
-                          }`}
+                          className={`flex items-center gap-2.5 p-2 rounded-xl text-[12.5px] cursor-pointer transition-colors ${isChecked ? 'bg-emerald-50 text-[#888] line-through' : 'bg-white text-[#333] shadow-sm'
+                            }`}
                         >
-                          <input 
+                          <input
                             type="checkbox"
                             checked={!!isChecked}
-                            onChange={() => {}}
+                            onChange={() => { }}
                             className="w-4 h-4 accent-[#1a9e38] rounded cursor-pointer"
                           />
                           <span className="font-semibold">{item}</span>
@@ -532,7 +529,7 @@ export default function MemberApp({ onBackToSalesPage }) {
         {activeTab === 'dicas' && (
           <div className="bg-white rounded-3xl p-6 border border-[#eedfd3] shadow-md mb-8">
             <h3 className="text-[20px] font-black text-[#1c3a27] mb-4">Segredos de Montagem da Chef Ju</h3>
-            
+
             <div className="space-y-4">
               {[
                 { title: 'Regra dos 3 Queijos', desc: 'Sempre combine 1 queijo macio (brie/gorgonzola), 1 queijo firme (gouda/provolone) e 1 queijo curado (parmesão).' },
@@ -560,9 +557,9 @@ export default function MemberApp({ onBackToSalesPage }) {
       {selectedRecipe && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-3 md:p-6 overflow-y-auto">
           <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[92vh] overflow-y-auto shadow-2xl relative border-2 border-[#eedfd3] p-4 md:p-6">
-            
+
             {/* Close Button */}
-            <button 
+            <button
               onClick={() => setSelectedRecipe(null)}
               className="absolute top-4 right-4 bg-[#f0e4d8] text-[#333] hover:bg-[#c02f23] hover:text-white w-9 h-9 rounded-full flex items-center justify-center transition-colors shadow-sm z-10"
             >
@@ -577,7 +574,7 @@ export default function MemberApp({ onBackToSalesPage }) {
               <h2 className="text-[24px] md:text-[30px] font-black text-[#1c3a27] leading-tight">
                 {selectedRecipe.title}
               </h2>
-              <p className="text-[13px] text-[#e86b24] font-bold" style={{fontFamily: "'Dancing Script', cursive", fontSize: '20px'}}>
+              <p className="text-[13px] text-[#e86b24] font-bold" style={{ fontFamily: "'Dancing Script', cursive", fontSize: '20px' }}>
                 {selectedRecipe.subtitle}
               </p>
             </div>
@@ -646,7 +643,7 @@ export default function MemberApp({ onBackToSalesPage }) {
             </div>
 
             {/* Modal Bottom Action Button */}
-            <button 
+            <button
               onClick={() => setSelectedRecipe(null)}
               className="w-full bg-[#1a9e38] text-white py-3.5 rounded-2xl font-black text-[14px] uppercase tracking-wider shadow-md hover:bg-[#15802e] transition-colors"
             >
@@ -668,9 +665,8 @@ export default function MemberApp({ onBackToSalesPage }) {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`flex flex-col items-center gap-0.5 transition-colors ${
-              activeTab === tab.id ? 'text-[#1a9e38] font-black' : 'text-[#8c7b77] hover:text-[#5a4843]'
-            }`}
+            className={`flex flex-col items-center gap-0.5 transition-colors ${activeTab === tab.id ? 'text-[#1a9e38] font-black' : 'text-[#8c7b77] hover:text-[#5a4843]'
+              }`}
           >
             <span className={`material-symbols-outlined text-[22px] ${activeTab === tab.id ? 'scale-110' : ''}`}>
               {tab.icon}
