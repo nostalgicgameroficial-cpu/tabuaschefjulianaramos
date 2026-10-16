@@ -840,8 +840,11 @@ function CaseirinhosPage({ onNavigateHome }) {
                     <div className="text-[38px] font-black text-[#059669] leading-none my-1.5">R$ 14</div>
                     <a 
                       className="w-full py-4 px-3 min-h-[52px] rounded-2xl bg-[#059669] text-white text-[14px] sm:text-[15px] font-black text-center flex items-center justify-center gap-2 shadow-md shadow-[#059669]/25 active:scale-95 transition-transform uppercase tracking-wider cursor-pointer"
-                      href="#checkout-basico"
-                      onClick={(e) => handleCheckoutClick(e, 'https://lastlink.com/p/checkout-caseirinhos-basico/', 'Guia Caseirinhos Básico R$ 14', 14)}
+                      href="https://lastlink.com/p/CA6FE5246/checkout-payment/"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setShowModal(true);
+                      }}
                     >
                       <span>QUERO O BÁSICO (R$ 14)</span>
                     </a>
@@ -910,8 +913,8 @@ function CaseirinhosPage({ onNavigateHome }) {
                     <div className="text-[38px] font-black text-[#ea580c] leading-none my-1.5">R$ 27</div>
                     <a 
                       className="w-full py-4 px-3 min-h-[54px] rounded-2xl bg-gradient-to-r from-[#ea580c] via-[#f97316] to-[#d97706] text-white text-[14px] sm:text-[15px] font-black text-center flex items-center justify-center gap-2 shadow-lg shadow-[#ea580c]/35 active:scale-95 transition-transform uppercase tracking-wider animate-pulse cursor-pointer"
-                      href="#checkout-completo"
-                      onClick={(e) => handleCheckoutClick(e, 'https://lastlink.com/p/checkout-caseirinhos-completo/', 'Combo Caseirinhos VIP Completo R$ 27', 27)}
+                      href="https://lastlink.com/p/CCCF540C4/checkout-payment/"
+                      onClick={(e) => handleCheckoutClick(e, 'https://lastlink.com/p/CCCF540C4/checkout-payment/', 'Combo Caseirinhos VIP Completo R$ 27', 27)}
                     >
                       <span>QUERO O COMPLETO VIP (R$ 27)</span>
                     </a>
@@ -1168,6 +1171,65 @@ function CaseirinhosPage({ onNavigateHome }) {
           <span className="material-symbols-outlined text-[24px]">monetization_on</span>
           <span>QUERO MEU ACESSO POR R$ 14</span>
         </a>
+      )}
+
+      {/* Modal de Recuperação / Upsell Irresistível por R$ 18,50 */}
+      {showModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+          <div className="bg-white rounded-3xl p-6 sm:p-7 w-full max-w-sm sm:max-w-md shadow-2xl relative text-center border-2 border-[#fed7aa]">
+            <button 
+              onClick={() => setShowModal(false)} 
+              className="absolute top-4 right-4 text-[#888] hover:text-[#333] p-1.5 rounded-full hover:bg-gray-100 transition-colors"
+              aria-label="Fechar"
+            >
+              <span className="material-symbols-outlined text-[20px]">close</span>
+            </button>
+
+            <div className="inline-flex items-center gap-1.5 bg-[#ffedd5] text-[#ea580c] px-3.5 py-1 rounded-full text-[11px] font-black uppercase tracking-wider mb-4 border border-[#fed7aa]">
+              <span className="material-symbols-outlined text-[15px]">local_fire_department</span>
+              <span>OFERTA ESPECIAL DE RECUPERAÇÃO!</span>
+            </div>
+
+            <h3 className="text-[20px] sm:text-[22px] text-[#3e1f0e] font-black leading-tight mb-2">
+              Espere! Que tal levar a Formação Completa?
+            </h3>
+
+            <p className="text-[13px] sm:text-[14px] text-[#6b4226] mb-4 leading-relaxed">
+              Por apenas mais <strong className="text-[#059669] text-[17px] font-black">R$ 4,50</strong> (Total: <strong className="text-[#ea580c] text-[18px] font-black">R$ 18,50</strong> em vez de <span className="line-through text-gray-400">R$ 27</span>), você leva o pacote <strong>COMPLETO VIP</strong> com todas as 120 receitas de caseirinhos, montagens gourmet e todos os 3 bônus exclusivos de renda extra!
+            </p>
+
+            <div className="bg-[#f0fdf4] border border-[#bbf7d0] rounded-2xl p-3 mb-4 text-left text-[11.5px] text-[#166534] font-semibold flex flex-col gap-1.5">
+              <div className="flex items-center gap-1.5">
+                <span>✓</span>
+                <span>Todas as 120 Receitas + 100 Recheios Sem Fogo</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span>✓</span>
+                <span>Guia de Montagens em Blister & Hambúrguer</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span>✓</span>
+                <span>Calculadora de Precificação + Etiquetas + Roteiro WhatsApp</span>
+              </div>
+            </div>
+
+            <a 
+              href="https://lastlink.com/p/C87F421E3/checkout-payment/" 
+              className="w-full py-4 px-4 rounded-2xl bg-gradient-to-r from-[#059669] via-[#10b981] to-[#047857] text-white text-[14px] sm:text-[15px] font-black block shadow-lg shadow-[#059669]/30 active:scale-95 transition-transform uppercase tracking-wider mb-3 text-center cursor-pointer"
+              onClick={(e) => handleCheckoutClick(e, 'https://lastlink.com/p/C87F421E3/checkout-payment/', 'Oferta Recuperação Caseirinhos VIP R$ 18,50', 18.5)}
+            >
+              <span>QUERO O COMPLETO POR R$ 18,50</span>
+            </a>
+
+            <a 
+              href="https://lastlink.com/p/CA6FE5246/checkout-payment/" 
+              className="w-full py-2 px-4 text-[12px] text-[#888] font-bold block underline hover:text-[#555] text-center cursor-pointer transition-colors"
+              onClick={(e) => handleCheckoutClick(e, 'https://lastlink.com/p/CA6FE5246/checkout-payment/', 'Guia Caseirinhos Básico R$ 14', 14)}
+            >
+              Não, quero apenas o básico por R$ 14,00
+            </a>
+          </div>
+        </div>
       )}
 
     </div>
