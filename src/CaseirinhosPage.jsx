@@ -161,86 +161,61 @@ function CaseirinhosPage({ onNavigateHome }) {
 
             <div className="max-w-5xl mx-auto flex flex-col md:grid md:grid-cols-2 items-center justify-center gap-6 md:gap-x-12 md:gap-y-0 relative z-10">
               
-              {/* Left Column: Headline, Hook de Custo & Lucro */}
+              {/* Left Column: Headline & Price */}
               <div className="flex flex-col items-center md:items-start text-center md:text-left md:col-start-1 md:row-start-1 w-full">
                 
                 {/* Badge Renda Extra */}
-                <div className="inline-flex items-center gap-1.5 bg-[#ea580c] text-white text-[11px] md:text-[12px] font-black uppercase px-3.5 py-1.5 rounded-full shadow-md mb-3">
-                  <span className="material-symbols-outlined text-[16px]">monetization_on</span>
-                  <span>RENDA EXTRA LUCRATIVA COM MINI BOLOS</span>
+                <div className="inline-flex items-center gap-1.5 bg-[#ea580c] text-white text-[11px] font-black uppercase px-3 py-1 rounded-full shadow-sm mb-3">
+                  <span>💰 MÉTODO EXCLUSIVO DE RENDA EXTRA</span>
                 </div>
                 
-                <h1 className="text-[28px] sm:text-[34px] md:text-[44px] leading-[1.12] text-[#3e1f0e] font-black tracking-tight mb-3">
-                  Caseirinhos Gourmet: <br className="hidden sm:inline" />
-                  Custo de <span className="text-[#059669] bg-[#ecfdf5] px-2 py-0.5 rounded-xl border border-[#a7f3d0]">R$ 2,00</span> e Venda por <span className="text-[#ea580c] bg-[#fff7ed] px-2 py-0.5 rounded-xl border border-[#fed7aa]">R$ 15,00</span>
+                <h1 className="text-[28px] sm:text-[34px] md:text-[42px] leading-[1.15] text-[#3e1f0e] font-black tracking-tight mb-2">
+                  + 60 Caseirinhos e Mini Bolos com <span className="text-[#ea580c]">Recheios Vulcão</span> <span style={{fontFamily: "'Dancing Script', cursive"}} className="text-[#059669] text-[32px] sm:text-[40px] md:text-[50px] inline-block font-bold">Com Mais de 600% de Lucro</span>
                 </h1>
 
-                {/* Sub-headline marcante */}
-                <p className="text-[15px] md:text-[17px] text-[#5c3e2e] leading-snug font-medium mb-4">
-                  Aprenda as massas mais fofinhas que não murcham, coberturas vulcão irresistíveis e as montagens em blister e hambúrguer que vendem no mesmo dia para você faturar de <strong className="text-[#059669] font-black">R$ 150 a R$ 300 por dia</strong> direto da sua cozinha.
-                </p>
-
-                <div className="flex items-center justify-center md:justify-start gap-3 mb-4 text-[#854d0e] text-[15px] md:text-[17px] font-serif italic font-bold">
+                <div className="flex items-center justify-center md:justify-start gap-3 mb-3 text-[#854d0e] text-[15px] md:text-[17px] font-serif italic font-bold">
                   <span className="w-10 h-[1px] bg-[#d97706]/40"></span>
-                  <span>Método Passo a Passo com a Chef Ju</span>
+                  <span>com a Chef Ju</span>
                   <span className="w-10 h-[1px] bg-[#d97706]/40"></span>
                 </div>
 
                 {/* Preço de R$ 14 */}
-                <div className="flex flex-col items-center md:items-start mb-4 w-full">
-                  <span className="text-[#c2410c] font-bold text-[14px] sm:text-[16px]">
-                    De <span className="line-through">R$ 67,00</span> por apenas
-                  </span>
-                  <div className="flex items-baseline gap-2 mt-0.5">
-                    <span className="text-[#059669] font-black text-[46px] sm:text-[54px] md:text-[62px] leading-none tracking-tighter">
-                      R$ 14
-                    </span>
-                    <span className="text-[13px] font-bold text-[#78350f] uppercase tracking-wide">
-                      Acesso Vitalício
-                    </span>
-                  </div>
+                <div className="flex flex-col items-center md:items-start mb-3 w-full">
+                  <span className="text-[#c2410c] font-bold text-[14px] sm:text-[16px]">De <span className="line-through">R$67</span> por apenas</span>
+                  <span className="text-[#059669] font-black text-[42px] sm:text-[50px] md:text-[58px] leading-none tracking-tighter mt-0.5">R$14</span>
                 </div>
 
               </div>
 
-              {/* Right Column: Hero Image (Chef Ju apontando sorrindo para os Caseirinhos) */}
-              <div className="w-full relative max-w-[360px] md:max-w-[460px] mb-6 md:mb-0 md:col-start-2 md:row-start-1 md:row-span-2 self-center flex justify-center">
-                
-                {/* 3D Sticker Badges flutuantes por cima da imagem */}
-                <div className="absolute -top-3 -right-2 bg-white/95 backdrop-blur-sm border-2 border-[#ea580c] text-[#ea580c] px-3 py-1.5 rounded-2xl shadow-xl z-20 flex items-center gap-1.5 rotate-[6deg] animate-pulse">
-                  <span className="text-[18px]">💰</span>
-                  <span className="text-[12px] font-black uppercase tracking-tight">+600% de Lucro</span>
-                </div>
-
-                <div className="absolute bottom-4 -left-3 bg-white/95 backdrop-blur-sm border-2 border-[#059669] text-[#059669] px-3 py-1.5 rounded-2xl shadow-xl z-20 flex items-center gap-1.5 rotate-[-5deg]">
-                  <span className="text-[18px]">🧁</span>
-                  <span className="text-[11px] font-black uppercase tracking-tight">Mini Bolos Vulcão</span>
-                </div>
-
+              {/* Right Column: Hero Image (Chef Ju com a foto real apontando para os Caseirinhos) */}
+              <div className="w-full relative max-w-[340px] md:max-w-[450px] mb-6 md:mb-0 md:col-start-2 md:row-start-1 md:row-span-2 self-center flex justify-center">
                 <img 
-                  alt="Chef Ju apontando para os Caseirinhos Gourmet Lucrativos" 
+                  alt="+60 Caseirinhos e Mini Bolos Lucrativos Chef Ju" 
                   width="750" 
                   height="750" 
                   fetchpriority="high" 
                   decoding="async" 
-                  className="w-full h-auto rounded-3xl object-cover shadow-[0_12px_36px_rgba(180,83,9,0.22)] hover:scale-105 transition-transform duration-500 border-4 border-white" 
+                  className="w-full h-auto rounded-3xl object-cover shadow-[0_8px_24px_rgba(0,0,0,0.15)] hover:scale-105 transition-transform duration-500 border border-[#ecd9cd]" 
                   src="./code_files/hero_caseirinhos.webp" 
                 />
               </div>
 
-              {/* CTA & Trust Seals */}
+              {/* Subheadline & CTA */}
               <div className="flex flex-col items-center md:items-start text-center md:text-left md:col-start-1 md:row-start-2 w-full">
+                <p className="font-medium text-[15px] md:text-[17px] leading-relaxed text-[#5c3e2e] max-w-[340px] md:max-w-[440px] mx-auto md:mx-0 mb-6">
+                  Mais de 60 receitas e montagens de caseirinhos gourmet e mini bolos vulcão para você faturar de R$ 150 a R$ 300 por dia. Custo médio de R$ 2,00 e venda por R$ 15,00 com mais de 600% de lucro líquido feito na cozinha da sua casa.
+                </p>
+
                 <a 
-                  className="w-full max-w-[340px] md:max-w-[420px] h-[64px] rounded-full bg-gradient-to-r from-[#ea580c] via-[#f97316] to-[#d97706] text-white flex items-center justify-center gap-2 text-[19px] md:text-[21px] font-black uppercase tracking-wide shadow-[0_10px_25px_rgba(234,88,12,0.4)] active:scale-95 hover:shadow-[0_12px_28px_rgba(234,88,12,0.5)] transition-all" 
+                  className="w-full max-w-[340px] md:max-w-[400px] h-[64px] rounded-full bg-[#059669] text-white flex items-center justify-center gap-2 text-[20px] md:text-[22px] font-black uppercase tracking-wide shadow-[0_8px_20px_rgba(5,150,105,0.3)] active:scale-95 transition-transform" 
                   href="#ofertas"
                 >
-                  <span className="material-symbols-outlined text-[28px]">savings</span>
-                  <span>QUERO COMEÇAR A LUCRAR</span>
+                  <span className="material-symbols-outlined text-[28px]">lock</span>
+                  <span>QUERO MEU ACESSO</span>
                 </a>
-
-                <span className="text-[12px] md:text-[14px] font-bold text-[#854d0e] flex items-center justify-center md:justify-start gap-1 mt-4 w-full md:max-w-[420px]">
-                  <span className="material-symbols-outlined text-[16px] md:text-[18px] text-[#059669]">verified_user</span>
-                  Pagamento 100% seguro • Acesso Imediato no E-mail e WhatsApp
+                <span className="text-[12px] md:text-[14px] font-bold text-[#854d0e] flex items-center justify-center md:justify-start gap-1 mt-4 w-full md:max-w-[400px]">
+                  <span className="material-symbols-outlined text-[15px] md:text-[18px]">verified_user</span>
+                  Compra 100% segura • Acesso vitalício
                 </span>
               </div>
 
