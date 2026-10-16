@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { initMetaParameterSetup, generateCapiPayload, hashData } from './metaParameterSetup';
 import MemberApp from './MemberApp';
 import SobremesasPage from './SobremesasPage';
+import CaseirinhosPage from './CaseirinhosPage';
 
 function App() {
   const [showFab, setShowFab] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [visitorId, setVisitorId] = useState('');
   const [fbclid, setFbclid] = useState('');
-  const [viewMode, setViewMode] = useState('sales'); // 'sales' | 'app' | 'sobremesas90'
+  const [viewMode, setViewMode] = useState('sales'); // 'sales' | 'app' | 'sobremesas90' | 'caseirinhos'
 
   // Check URL pathname, query parameters or hash for routing
   useEffect(() => {
@@ -17,6 +18,13 @@ function App() {
     const params = new URLSearchParams(window.location.search);
 
     if (
+      path.includes('caseirinho') || 
+      hash.includes('caseirinho') || 
+      params.get('page') === 'caseirinhos' || 
+      params.get('p') === 'caseirinhos'
+    ) {
+      setViewMode('caseirinhos');
+    } else if (
       path.includes('sobremesas90') || 
       path.includes('sobremesas') ||
       hash.includes('sobremesas90') || 
@@ -35,6 +43,12 @@ function App() {
       const currentParams = new URLSearchParams(window.location.search);
 
       if (
+        currentPath.includes('caseirinho') || 
+        currentHash.includes('caseirinho') || 
+        currentParams.get('page') === 'caseirinhos'
+      ) {
+        setViewMode('caseirinhos');
+      } else if (
         currentPath.includes('sobremesas90') || 
         currentPath.includes('sobremesas') ||
         currentHash.includes('sobremesas90') || 
@@ -261,6 +275,10 @@ function App() {
       toggles.forEach(btn => btn.removeEventListener('click', handleClick));
     };
   }, []);
+
+  if (viewMode === 'caseirinhos') {
+    return <CaseirinhosPage onNavigateHome={() => setViewMode('sales')} />;
+  }
 
   if (viewMode === 'sobremesas90') {
     return <SobremesasPage onNavigateHome={() => setViewMode('sales')} />;
